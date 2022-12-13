@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/shadmanhere/learning-path-api#readme",
   "dependencies": {
+    "@prisma/client": "^4.7.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },
