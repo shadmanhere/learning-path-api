@@ -20,7 +20,8 @@ export const getUsers = async (req: express.Request, res: express.Response) => {
     const users = await prisma.user.findMany({
       select: {
         email: true,
-        name: true,
+        firstName: true,
+        lastName: true,
         username: true,
         role: true,
         createdAt: true,
@@ -52,7 +53,7 @@ export const signin = async (req: express.Request, res: express.Response) => {
 
 export const signup = async (req: express.Request, res: express.Response) => {
   try {
-    const { email, username, password, confirmPassword, name } = req.body;
+    const { email, username, password, confirmPassword, firstName, lastName } = req.body;
     const existingUser = await prisma.user.findUnique({
       where: {
         username: username,
@@ -62,10 +63,11 @@ export const signup = async (req: express.Request, res: express.Response) => {
     if (password !== confirmPassword) res.status(400).json({ message: "Passwords don't match" });
     const user = await prisma.user.create({
       data: {
-        email: email,
-        username: username,
-        password: password,
-        name: name,
+        email,
+        username,
+        firstName,
+        lastName,
+        password,
       },
     });
     const userWithoutPassword = exclude(user, ['password']);
