@@ -9,7 +9,7 @@ const app: Express = express();
 const port = process.env.PORT;
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Okay 🚀');
+  res.send('Welcome to Learning Path Api');
 });
 app.use('/users', userRoutes);
 
