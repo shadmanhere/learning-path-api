@@ -7,9 +7,25 @@ import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
 const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
 
+// Exclude keys from user
+function exclude<User, Key extends keyof User>(user: User, keys: Key[]): Omit<User, Key> {
+  for (const key of keys) {
+    delete user[key];
+  }
+  return user;
+}
+
 export const getUsers = async (req: express.Request, res: express.Response) => {
   try {
-    const users = await prisma.user.findMany({});
+    const users = await prisma.user.findMany({
+      select: {
+        email: true,
+        name: true,
+        username: true,
+        role: true,
+        createdAt: true,
+      },
+    });
     res.send(users);
   } catch (err) {
     res.status(500).json({ message: 'Something went wrong' });
@@ -34,8 +50,9 @@ export const signup = async (req: express.Request, res: express.Response) => {
         name: name,
       },
     });
+    const userWithoutPassword = exclude(user, ['password']);
     const token = await jwt.sign({ email: user.username, id: user.id }, 'secret', { expiresIn: '1h' });
-    res.status(200).json({ user, token });
+    res.status(200).json({ userWithoutPassword, token });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Something went wrong' });
