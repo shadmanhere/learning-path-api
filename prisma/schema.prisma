@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  username  String   @unique
-  name      String
-  password  String   /// @encrypted <- annotate fields to encrypt
-  role      Role     @default(USER)
+  id              Int              @id @default(autoincrement())
+  createdAt       DateTime         @default(now())
+  email           String           @unique
+  username        String           @unique
+  name            String
+  password  String /// @encrypted <- annotate fields to encryp
+  role            Role             @default(USER)
 }
+
 
 enum Role {
   USER
