@@ -32,6 +32,24 @@ export const getUsers = async (req: express.Request, res: express.Response) => {
   }
 };
 
+export const signin = async (req: express.Request, res: express.Response) => {
+  try {
+    const { username, password } = req.body;
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+    });
+    if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
+    if (password !== existingUser.password) return res.status(404).json('Invalid Credentials');
+    const token = jwt.sign({ email: existingUser.email, id: existingUser.id }, 'secret', { expiresIn: '1h' });
+    const existingUserWithoutPassword = exclude(existingUser, ['password']);
+    res.status(200).json({ result: existingUserWithoutPassword, token });
+  } catch (err) {
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+};
+
 export const signup = async (req: express.Request, res: express.Response) => {
   try {
     const { email, username, password, confirmPassword, name } = req.body;
