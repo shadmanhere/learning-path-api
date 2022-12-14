@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
 
 const prisma = new PrismaClient();
@@ -54,12 +54,6 @@ export const signin = async (req: express.Request, res: express.Response) => {
 export const signup = async (req: express.Request, res: express.Response) => {
   try {
     const { email, username, password, confirmPassword, firstName, lastName } = req.body;
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        username: username,
-      },
-    });
-    if (existingUser) return res.status(400).json({ message: 'User already exist' });
     if (password !== confirmPassword) res.status(400).json({ message: "Passwords don't match" });
     const user = await prisma.user.create({
       data: {
@@ -73,8 +67,12 @@ export const signup = async (req: express.Request, res: express.Response) => {
     const userWithoutPassword = exclude(user, ['password']);
     const token = await jwt.sign({ email: user.username, id: user.id }, 'secret', { expiresIn: '1h' });
     res.status(200).json({ userWithoutPassword, token });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: 'Something went wrong' });
+  } catch (error) {
+    let errorMessage: string | undefined | unknown = 'Something went wrong';
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.meta?.target === 'User_username_key') errorMessage = 'Username already exists';
+      else if (error.meta?.target === 'User_email_key') errorMessage = 'Email already exists';
+    }
+    res.status(500).json({ message: errorMessage });
   }
 };
