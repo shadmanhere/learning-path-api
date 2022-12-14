@@ -27,18 +27,26 @@ enum Role {
 }
 
 model LearningPath {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now())
-  name      String     @unique
-  tutorials Tutorial[]
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  name      String    @unique
+  Section   Section[]
+}
+
+model Section {
+  id             Int           @id @default(autoincrement())
+  createdAt      DateTime      @default(now())
+  name           String        @unique
+  tutorials      Tutorial[]
+  LearningPath   LearningPath? @relation(fields: [learningPathId], references: [id])
+  learningPathId Int?
 }
 
 model Tutorial {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  title     String   @unique
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  title     String    @unique
   url       String
   image_url String
-
-  LearningPath   LearningPath[]
+  Section   Section[]
 }
