@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
 
-module.exports =
+export const catchAsyncErrors =
   (
     func: (
       arg0: Request<ParamsDictionary, unknown, unknown, ParsedQs, Record<string, unknown>>,

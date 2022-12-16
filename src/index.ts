@@ -8,6 +8,8 @@ import tutorialsRoutes from './routes/tutorials';
 import sections from './routes/sections';
 import learningpaths from './routes/learningpaths';
 
+import { errorHandler } from './middlewares/error';
+
 dotenv.config();
 
 const app: Express = express();
@@ -24,6 +26,18 @@ app.use('/api/v1/learningpath', learningpaths);
 app.use('/api/v1/section', sections);
 app.use('/api/v1/tutorial', tutorialsRoutes);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+});
+
+// Middleware to handle errors
+app.use(errorHandler);
+
+// Handle Unhandled Promise rejections
+process.on('unhandledRejection', (err: Error) => {
+  console.log(`ERROR: ${err.stack}`);
+  console.log('Shutting down the server due to Unhandled Promise rejection');
+  server.close(() => {
+    process.exit(1);
+  });
 });
