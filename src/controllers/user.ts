@@ -54,7 +54,7 @@ export const signin = catchAsyncErrors(async (req: express.Request, res: express
 export const signup = catchAsyncErrors(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const { email, username, password, confirmPassword, firstName, lastName } = req.body;
 
-  // Checks if email and password is entered by user
+  // Checks if email, username, password, confirmPassword, firstName and lastName is entered by user
   if (!username) {
     return next(new ErrorHandler('Please enter username', 400));
   } else if (!password) {
