@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 import ErrorHandler from '../utils/errorHandler';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 export const errorHandler = (err: ErrorHandler | Prisma.PrismaClientKnownRequestError | any, req: Request, res: Response, next: NextFunction) => {
   err.statusCode = err.statusCode || 500;
   if (process.env.NODE_ENV === 'DEVELOPMENT') {
