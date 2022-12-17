@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
-
+import { sendToken } from '../utils/jwtToken';
 import { PrismaClient } from '@prisma/client';
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
 
@@ -31,26 +31,20 @@ export const getUsers = catchAsyncErrors(async (req: express.Request, res: expre
   res.send(users);
 });
 
-export const signin = async (req: express.Request, res: express.Response) => {
-  try {
-    const { username, password } = req.body;
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        username: username,
-      },
-    });
-    if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
-    if (password !== existingUser.password) return res.status(404).json('Invalid Credentials');
-    const token = jwt.sign({ email: existingUser.email, id: existingUser.id }, 'secret', { expiresIn: '1h' });
-    const existingUserWithoutPassword = exclude(existingUser, ['password']);
-    res.status(200).json({ result: existingUserWithoutPassword, token });
-  } catch (err) {
-    res.status(500).json({ message: 'Something went wrong' });
-  }
-};
+export const signin = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
+  const { username, password } = req.body;
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      username: username,
+    },
+  });
+  if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
+  if (password !== existingUser.password) return res.status(404).json('Invalid Credentials');
+  const existingUserWithoutPassword = exclude(existingUser, ['password']);
+  sendToken(existingUserWithoutPassword, 200, res);
+});
 
 export const signup = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
-  // try {
   const { email, username, password, confirmPassword, firstName, lastName } = req.body;
   if (password !== confirmPassword) res.status(400).json({ message: "Passwords don't match" });
   const user = await prisma.user.create({
@@ -63,6 +57,5 @@ export const signup = catchAsyncErrors(async (req: express.Request, res: express
     },
   });
   const userWithoutPassword = exclude(user, ['password']);
-  const token = jwt.sign({ email: user.username, id: user.id }, 'secret', { expiresIn: '1h' });
-  res.status(200).json({ userWithoutPassword, token });
+  sendToken(userWithoutPassword, 200, res);
 });
