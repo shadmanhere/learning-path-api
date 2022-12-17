@@ -1,7 +1,8 @@
+import { Prisma } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 import ErrorHandler from '../utils/errorHandler';
 
-export const errorHandler = (err: ErrorHandler, req: Request, res: Response, next: NextFunction) => {
+export const errorHandler = (err: ErrorHandler | Prisma.PrismaClientKnownRequestError | any, req: Request, res: Response, next: NextFunction) => {
   err.statusCode = err.statusCode || 500;
   if (process.env.NODE_ENV === 'DEVELOPMENT') {
     console.error(err);
@@ -19,8 +20,13 @@ export const errorHandler = (err: ErrorHandler, req: Request, res: Response, nex
 
     error.message = err.message;
 
-    if (err.name === 'CastError') {
-      const message = `Resource not found. Invalid: ${err.stack}`;
+    if (err.meta.target === 'User_username_key') {
+      const message = 'Username already exists';
+      error = new ErrorHandler(message, 400);
+    }
+
+    if (err.meta.target === 'User_email_key') {
+      const message = 'Email already exists';
       error = new ErrorHandler(message, 400);
     }
 
