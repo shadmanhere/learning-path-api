@@ -1,8 +1,11 @@
 import express from 'express';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
-import { sendToken } from '../utils/jwtToken';
 import { PrismaClient } from '@prisma/client';
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
+
+// util
+import { sendToken } from '../utils/jwtToken';
+import ErrorHandler from '../utils/errorHandler';
 
 const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
@@ -16,7 +19,6 @@ function exclude<User, Key extends keyof User>(user: User, keys: Key[]): Omit<Us
 }
 
 export const getUsers = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
-  // try {
   const users = await prisma.user.findMany({
     select: {
       email: true,
@@ -30,8 +32,14 @@ export const getUsers = catchAsyncErrors(async (req: express.Request, res: expre
   res.send(users);
 });
 
-export const signin = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
+export const signin = catchAsyncErrors(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const { username, password } = req.body;
+
+  // Checks if email and password is entered by user
+  if (!username || !password) {
+    return next(new ErrorHandler('Please enter username & password', 400));
+  }
+
   const existingUser = await prisma.user.findUnique({
     where: {
       username: username,
@@ -43,9 +51,21 @@ export const signin = catchAsyncErrors(async (req: express.Request, res: express
   sendToken(existingUserWithoutPassword, 200, res);
 });
 
-export const signup = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
+export const signup = catchAsyncErrors(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const { email, username, password, confirmPassword, firstName, lastName } = req.body;
-  if (password !== confirmPassword) res.status(400).json({ message: "Passwords don't match" });
+
+  // Checks if email and password is entered by user
+  if (!username) {
+    return next(new ErrorHandler('Please enter username', 400));
+  } else if (!password) {
+    return next(new ErrorHandler('Please enter password', 400));
+  } else if (!firstName) {
+    return next(new ErrorHandler('Please enter first name', 400));
+  } else if (!lastName) {
+    return next(new ErrorHandler('Please enter last name', 400));
+  }
+
+  if (password !== confirmPassword) next(new ErrorHandler("Passwords don't match", 400));
   const user = await prisma.user.create({
     data: {
       email,

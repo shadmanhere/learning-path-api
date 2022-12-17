@@ -21,18 +21,18 @@ export const errorHandler = (err: ErrorHandler | Prisma.PrismaClientKnownRequest
 
     error.message = err.message;
 
-    if (err.meta.target === 'User_username_key') {
+    if (err?.meta?.target === 'User_username_key') {
       const message = 'Username already exists';
       error = new ErrorHandler(message, 400);
     }
 
-    if (err.meta.target === 'User_email_key') {
+    if (err?.meta?.target === 'User_email_key') {
       const message = 'Email already exists';
       error = new ErrorHandler(message, 400);
     }
 
     // Handling Expired JWT error
-    if (err.name === 'TokenExpiredError') {
+    if (err?.name === 'TokenExpiredError') {
       const message = 'JSON Web Token is expired. Try Again!!!';
       error = new ErrorHandler(message, 400);
     }
