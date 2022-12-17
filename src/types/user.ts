@@ -9,7 +9,7 @@ export interface User {
   role: Role;
 }
 
-enum Role {
+export enum Role {
   USER,
   ADMIN,
 }

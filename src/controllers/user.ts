@@ -6,17 +6,10 @@ import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
 // util
 import { sendToken } from '../utils/jwtToken';
 import ErrorHandler from '../utils/errorHandler';
+import excludeKey from '../utils/excludeKey';
 
 const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
-
-// Exclude keys from user
-function exclude<User, Key extends keyof User>(user: User, keys: Key[]): Omit<User, Key> {
-  for (const key of keys) {
-    delete user[key];
-  }
-  return user;
-}
 
 export const getUsers = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
   const users = await prisma.user.findMany({
@@ -47,7 +40,7 @@ export const signin = catchAsyncErrors(async (req: express.Request, res: express
   });
   if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
   if (password !== existingUser.password) return res.status(404).json('Invalid Credentials');
-  const existingUserWithoutPassword = exclude(existingUser, ['password']);
+  const existingUserWithoutPassword = excludeKey(existingUser, ['password']);
   sendToken(existingUserWithoutPassword, 200, res);
 });
 
@@ -75,6 +68,6 @@ export const signup = catchAsyncErrors(async (req: express.Request, res: express
       password,
     },
   });
-  const userWithoutPassword = exclude(user, ['password']);
+  const userWithoutPassword = excludeKey(user, ['password']);
   sendToken(userWithoutPassword, 200, res);
 });

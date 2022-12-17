@@ -4,10 +4,11 @@ import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 // util
 import ErrorHandler from '../utils/errorHandler';
+import excludeKey from '../utils/excludeKey';
 
 const prisma = new PrismaClient();
 
-import { User } from '../types/user';
+import { Role, User } from '../types/user';
 // to make the file a module and avoid the TypeScript error
 export {};
 
@@ -28,7 +29,18 @@ export const isAuthenticated = catchAsyncErrors(async (req: CustomRequest, res: 
       id: decoded.id,
     },
   });
+  const newUser = excludeKey(user, ['password'] as never);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  req.user = user as any;
+  req.user = newUser as any;
   next();
 });
+
+// Handling users roles
+export const authorizeRoles = (...roles: (Role | undefined)[]) => {
+  return (req: CustomRequest, res: Response, next: NextFunction) => {
+    if (!roles.includes(req?.user?.role)) {
+      return next(new ErrorHandler(`Role (${req?.user?.role}) is not allowed to acccess this resource`, 403));
+    }
+    next();
+  };
+};
