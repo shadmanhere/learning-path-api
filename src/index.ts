@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express';
+import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
@@ -17,6 +18,7 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json({ limit: '32mb' }));
 app.use(bodyParser.urlencoded({ limit: '32mb', extended: true }));
+app.use(cookieParser());
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to Learning Path Api');

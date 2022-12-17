@@ -1,11 +1,12 @@
 import express from 'express';
+import { isAuthenticated } from '../middlewares/auth';
 import { getUsers } from '../controllers/user';
 import { signup } from '../controllers/user';
 import { signin } from '../controllers/user';
 
 const router = express.Router();
 
-router.get('/', getUsers);
+router.route('/').post(isAuthenticated, getUsers);
 router.post('/signup', signup);
 router.post('/signin', signin);
 
