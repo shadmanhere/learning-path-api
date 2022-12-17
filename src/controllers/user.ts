@@ -1,5 +1,4 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { sendToken } from '../utils/jwtToken';
 import { PrismaClient } from '@prisma/client';
