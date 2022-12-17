@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "nodemon",
+    "seeder": "npx ts-node src/utils/seeder.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
     "prepare": "husky install"
@@ -25,6 +26,7 @@
     "@types/body-parser": "^1.19.2",
     "@types/cookie-parser": "^1.4.3",
     "@types/jsonwebtoken": "^8.5.9",
+    "axios": "^1.2.1",
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
