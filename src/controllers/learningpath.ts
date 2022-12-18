@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
 // util
@@ -7,12 +7,12 @@ import capitalize from '../utils/capitalize';
 
 const prisma = new PrismaClient();
 
-export const getPaths = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
+export const getPaths = catchAsyncErrors(async (req: Request, res: Response) => {
   const learningPaths = await prisma.learningPath.findMany({});
   res.send(learningPaths);
 });
 
-export const getPath = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
+export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
   const pathName = req.params.pathname.split('-').join(' ');
   const pathNameCapitalized = pathName
     .split(' ')
