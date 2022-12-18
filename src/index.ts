@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 //Routes
 import userRoutes from './routes/users';
@@ -16,6 +17,12 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
 
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: '32mb' }));
 app.use(bodyParser.urlencoded({ limit: '32mb', extended: true }));
 app.use(cookieParser());
