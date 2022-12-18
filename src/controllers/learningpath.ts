@@ -8,8 +8,8 @@ import capitalize from '../utils/capitalize';
 const prisma = new PrismaClient();
 
 export const getPaths = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
-  const learningPath = await prisma.learningPath.findMany({});
-  res.send(learningPath);
+  const learningPaths = await prisma.learningPath.findMany({});
+  res.send(learningPaths);
 });
 
 export const getPath = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
