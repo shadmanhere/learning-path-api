@@ -1,0 +1,17 @@
+[
+  { "name": "Essentials", "learningPathId": "5" },
+  { "name": "Intermidiate", "learningPathId": "4" },
+  { "name": "Essentials", "learningPathId": "2" },
+  { "name": "Advance", "learningPathId": "2" },
+  { "name": "Essentials", "learningPathId": "1" },
+  { "name": "Advance", "learningPathId": "1" },
+  { "name": "Essentials", "learningPathId": "3" },
+  { "name": "Advance", "learningPathId": "3" },
+  { "name": "Essentials", "learningPathId": "5" },
+  { "name": "Manual Testing", "learningPathId": "5" },
+  { "name": "Agile", "learningPathId": "5" },
+  { "name": "Mobile Testing", "learningPathId": "5" },
+  { "name": "Database Testing", "learningPathId": "5" },
+  { "name": "Automation Testing - Selenium Java Training", "learningPathId": "5" },
+  { "name": "API Testing", "learningPathId": "5" }
+]
