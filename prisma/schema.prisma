@@ -36,7 +36,7 @@ model LearningPath {
 model Section {
   id             Int           @id @default(autoincrement())
   createdAt      DateTime      @default(now())
-  name           String        @unique
+  name           String
   tutorials      Tutorial[]
   LearningPath   LearningPath? @relation(fields: [learningPathId], references: [id])
   learningPathId Int?
