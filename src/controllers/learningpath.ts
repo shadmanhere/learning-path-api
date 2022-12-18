@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
 // util
 import capitalize from '../utils/capitalize';
-// import ErrorHandler from '../utils/errorHandler';
+import ErrorHandler from '../utils/errorHandler';
 
 const prisma = new PrismaClient();
 
@@ -30,6 +30,20 @@ export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
           tutorials: true,
         },
       },
+    },
+  });
+  res.send(learningPath);
+});
+
+export const addPath = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { name } = req.body;
+  if (!name) {
+    return next(new ErrorHandler('Please enter username & password', 400));
+  }
+
+  const learningPath = await prisma.learningPath.create({
+    data: {
+      name,
     },
   });
   res.send(learningPath);
