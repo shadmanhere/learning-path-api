@@ -1,7 +1,8 @@
 import express from 'express';
-import { getPaths } from '../controllers/learningpath';
+import { getPath, getPaths } from '../controllers/learningpath';
 const router = express.Router();
 
 router.route('/').get(getPaths);
+router.route('/:pathname').get(getPath);
 
 export default router;
