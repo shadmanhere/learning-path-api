@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
 // util
