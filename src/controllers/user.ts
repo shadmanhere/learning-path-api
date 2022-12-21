@@ -84,7 +84,7 @@ export const getUserProfile = catchAsyncErrors(async (req: CustomRequest, res: R
   const userWithoutPassword = user ? excludeKey(user, ['password']) : '';
   res.status(200).json({
     success: true,
-    userWithoutPassword,
+    user: userWithoutPassword,
   });
 });
 
