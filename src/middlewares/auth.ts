@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
@@ -8,13 +8,11 @@ import excludeKey from '../utils/excludeKey';
 
 const prisma = new PrismaClient();
 
-import { Role, User } from '../types/user';
+//types
+import { Role } from '../types/user';
+import { CustomRequest } from '../types/customRequest';
 // to make the file a module and avoid the TypeScript error
 export {};
-
-export interface CustomRequest extends Request {
-  user?: User;
-}
 
 // check whether user is authenticated
 export const isAuthenticated = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
@@ -38,7 +36,6 @@ export const isAuthenticated = catchAsyncErrors(async (req: CustomRequest, res: 
 // Handling users roles
 export const authorizeRoles = (...roles: (Role | undefined)[]) => {
   return (req: CustomRequest, res: Response, next: NextFunction) => {
-    console.log(roles);
     if (!roles.includes(req?.user?.role)) {
       return next(new ErrorHandler(`Role (${req?.user?.role}) is not allowed to acccess this resource`, 403));
     }

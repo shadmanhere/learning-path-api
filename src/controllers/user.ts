@@ -1,4 +1,4 @@
-import express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
@@ -8,10 +8,13 @@ import { sendToken } from '../utils/jwtToken';
 import ErrorHandler from '../utils/errorHandler';
 import excludeKey from '../utils/excludeKey';
 
+//types
+import { CustomRequest } from '../types/customRequest';
+
 const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
 
-export const getUsers = catchAsyncErrors(async (req: express.Request, res: express.Response) => {
+export const getUsers = catchAsyncErrors(async (req: Request, res: Response) => {
   const users = await prisma.user.findMany({
     select: {
       email: true,
@@ -25,7 +28,7 @@ export const getUsers = catchAsyncErrors(async (req: express.Request, res: expre
   res.send(users);
 });
 
-export const signin = catchAsyncErrors(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export const signin = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
 
   // Checks if email and password is entered by user
@@ -44,7 +47,7 @@ export const signin = catchAsyncErrors(async (req: express.Request, res: express
   sendToken(existingUserWithoutPassword, 200, res);
 });
 
-export const signup = catchAsyncErrors(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export const signup = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { email, username, password, confirmPassword, firstName, lastName } = req.body;
 
   // Checks if email, username, password, confirmPassword, firstName and lastName is entered by user
@@ -70,4 +73,17 @@ export const signup = catchAsyncErrors(async (req: express.Request, res: express
   });
   const userWithoutPassword = excludeKey(user, ['password']);
   sendToken(userWithoutPassword, 200, res);
+});
+
+export const getUserProfile = catchAsyncErrors(async (req: CustomRequest, res: Response) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: req.user?.id,
+    },
+  });
+  const userWithoutPassword = user ? excludeKey(user, ['password']) : '';
+  res.status(200).json({
+    success: true,
+    userWithoutPassword,
+  });
 });
