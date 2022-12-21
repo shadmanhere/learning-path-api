@@ -12,3 +12,15 @@ export const getRandomTutorials = catchAsyncErrors(async (req: Request, res: Res
   });
   res.send(tutorials);
 });
+
+// /api/v1/tutorial/videoId
+export const getTutorial = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const videoId = req.params.videoId;
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+  const tutorial = await prisma.tutorial.findFirst({
+    where: {
+      url: videoUrl,
+    },
+  });
+  res.send(tutorial);
+});
