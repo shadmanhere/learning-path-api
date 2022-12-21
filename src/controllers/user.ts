@@ -95,3 +95,13 @@ export const logout = catchAsyncErrors(async (req: CustomRequest, res: Response)
   });
   res.status(200).json({ success: true, message: 'Logged Out' });
 });
+
+export const forgotPassword = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: req.user?.email,
+    },
+  });
+
+  // TODO: complete forgotpassoword controller
+});
