@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
+import crypto from 'crypto';
 
 // util
 import { sendToken } from '../utils/jwtToken';
@@ -150,4 +151,36 @@ export const forgotPassword = catchAsyncErrors(async (req: CustomRequest, res: R
 
     return next(new ErrorHandler(error.message, 500));
   }
+});
+
+export const getResetPassword = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
+  // Hash URL token
+  const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+  const user = await prisma.user.findFirst({
+    where: {
+      resetPasswordToken,
+      resetPasswordExpire: { gte: new Date(Date.now()) },
+    },
+  });
+
+  if (!user) {
+    return next(new ErrorHandler('Password reset token is invalid or has been expired', 400));
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler('Password does not match', 400));
+  }
+  user.password = req.body.password;
+  user.resetPasswordToken = null;
+  user.resetPasswordExpire = null;
+  await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      ...user,
+    },
+  });
+  sendToken(user, 200, res);
 });
