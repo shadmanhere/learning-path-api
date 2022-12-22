@@ -17,20 +17,6 @@ import { sendEmail } from '../utils/sendEmail';
 const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
 
-export const getUsers = catchAsyncErrors(async (req: Request, res: Response) => {
-  const users = await prisma.user.findMany({
-    select: {
-      email: true,
-      firstName: true,
-      lastName: true,
-      username: true,
-      role: true,
-      createdAt: true,
-    },
-  });
-  res.send(users);
-});
-
 export const signin = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
 

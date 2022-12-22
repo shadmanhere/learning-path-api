@@ -7,8 +7,10 @@ import cors from 'cors';
 //Routes
 import userRoutes from './routes/users';
 import tutorialsRoutes from './routes/tutorials';
-import sections from './routes/sections';
-import learningpaths from './routes/learningpaths';
+import sectionsRoutes from './routes/sections';
+import learningPathsRoute from './routes/learningpaths';
+
+import adminRoutes from './routes/admin';
 
 import { errorHandler } from './middlewares/error';
 
@@ -31,9 +33,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to Learning Path Api');
 });
 app.use('/api/v1/user', userRoutes);
-app.use('/api/v1/learningpath', learningpaths);
-app.use('/api/v1/section', sections);
+app.use('/api/v1/learningpath', learningPathsRoute);
+app.use('/api/v1/section', sectionsRoutes);
 app.use('/api/v1/tutorial', tutorialsRoutes);
+
+app.use('/api/v1/admin', adminRoutes);
 
 const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
