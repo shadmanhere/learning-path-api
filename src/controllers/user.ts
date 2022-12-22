@@ -10,6 +10,8 @@ import excludeKey from '../utils/excludeKey';
 
 //types
 import { CustomRequest } from '../types/customRequest';
+import { getResetPasswordToken } from '../utils/cryptoToken';
+import { sendEmail } from '../utils/sendEmail';
 
 const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
@@ -97,11 +99,55 @@ export const logout = catchAsyncErrors(async (req: CustomRequest, res: Response)
 });
 
 export const forgotPassword = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
+  const { email } = req.body;
+  if (!email) {
+    return next(new ErrorHandler('Please enter email', 400));
+  }
   const user = await prisma.user.findUnique({
     where: {
-      email: req.user?.email,
+      email: email,
     },
   });
 
-  // TODO: complete forgotpassoword controller
+  if (!user) {
+    return next(new ErrorHandler('User not found with this email', 404));
+  }
+  const resetToken = getResetPasswordToken(user);
+  await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      ...user,
+    },
+  });
+
+  const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
+
+  const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'Learning Path Password Recovery',
+      message,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to: ${user.email}`,
+    });
+  } catch (error: any) {
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        resetPasswordToken: null,
+        resetPasswordExpire: null,
+      },
+    });
+
+    return next(new ErrorHandler(error.message, 500));
+  }
 });
