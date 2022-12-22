@@ -208,3 +208,28 @@ export const updatePassword = catchAsyncErrors(async (req: CustomRequest, res: R
   });
   sendToken(user, 200, res);
 });
+
+export const updateProfile = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
+  const newUser = {
+    username: req.body.username,
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+  };
+
+  await prisma.user.update({
+    where: {
+      id: req?.user?.id,
+    },
+    data: {
+      username: newUser.username,
+      email: newUser.email,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
