@@ -193,16 +193,18 @@ export const updatePassword = catchAsyncErrors(async (req: CustomRequest, res: R
     },
   });
 
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
+
   if (user?.password !== req.body.oldPassword) return next(new ErrorHandler('Old password is incorrect', 404));
   await prisma.user.update({
     where: {
-      id: user?.id,
+      id: user.id,
     },
     data: {
       password: req.body.password,
     },
   });
-  res.status(200).json({
-    success: true,
-  });
+  sendToken(user, 200, res);
 });
