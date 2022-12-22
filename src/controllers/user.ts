@@ -184,3 +184,25 @@ export const getResetPassword = catchAsyncErrors(async (req: CustomRequest, res:
   });
   sendToken(user, 200, res);
 });
+
+export const updatePassword = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
+  const id = req?.user?.id;
+  const user = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (user?.password !== req.body.oldPassword) return next(new ErrorHandler('Old password is incorrect', 404));
+  await prisma.user.update({
+    where: {
+      id: user?.id,
+    },
+    data: {
+      password: req.body.password,
+    },
+  });
+  res.status(200).json({
+    success: true,
+  });
+});
