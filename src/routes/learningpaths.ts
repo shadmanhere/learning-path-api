@@ -5,8 +5,8 @@ import { Role } from '../types/user';
 
 const router = express.Router();
 
-router.route('/').get(getPaths);
-router.route('/:pathname').get(getPath);
+router.route('/').get(isAuthenticated, getPaths);
+router.route('/:pathname').get(isAuthenticated, getPath);
 router.route('/new').post(isAuthenticated, authorizeRoles(Role.ADMIN), addPath);
 
 export default router;
