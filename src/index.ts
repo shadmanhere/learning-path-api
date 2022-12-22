@@ -10,8 +10,6 @@ import tutorialsRoutes from './routes/tutorials';
 import sectionsRoutes from './routes/sections';
 import learningPathsRoute from './routes/learningpaths';
 
-import adminRoutes from './routes/admin';
-
 import { errorHandler } from './middlewares/error';
 
 dotenv.config();
@@ -36,8 +34,6 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/learningpath', learningPathsRoute);
 app.use('/api/v1/section', sectionsRoutes);
 app.use('/api/v1/tutorial', tutorialsRoutes);
-
-app.use('/api/v1/admin', adminRoutes);
 
 const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);

@@ -219,3 +219,76 @@ export const updateProfile = catchAsyncErrors(async (req: CustomRequest, res: Re
     success: true,
   });
 });
+
+// Admin Route
+export const getUsers = catchAsyncErrors(async (req: Request, res: Response) => {
+  const resPerPage = 10;
+  const pageNumber = (req.query.pageNumber as unknown as number) || 0;
+  const totalCount = await prisma.user.count({});
+  const users = await prisma.user.findMany({
+    skip: (pageNumber - 1) * resPerPage,
+    take: +resPerPage,
+  });
+  users.forEach((user) => {
+    excludeKey(user, ['password']);
+  });
+  res.status(200).json({
+    success: true,
+    totalCount,
+    resPerPage,
+    pageNumber,
+    users,
+  });
+});
+
+export const getUserDetails = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: +req.params.id,
+    },
+  });
+  if (!user) {
+    return next(new ErrorHandler(`User does not found with id: ${req.params.id}`, 404));
+  }
+  const userWithoutPassword = excludeKey(user, ['password']);
+
+  res.status(200).json({
+    success: true,
+    userWithoutPassword,
+  });
+});
+
+export const updateUserDetails = catchAsyncErrors(async (req: Request, res: Response) => {
+  const newUserDetails = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    username: req.body.username,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  await prisma.user.update({
+    where: {
+      id: +req.params.id,
+    },
+    data: {
+      ...newUserDetails,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+export const deleteUser = catchAsyncErrors(async (req: Request, res: Response) => {
+  await prisma.user.delete({
+    where: {
+      id: +req.params.id,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
