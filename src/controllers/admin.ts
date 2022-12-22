@@ -9,12 +9,21 @@ import ErrorHandler from '../utils/errorHandler';
 const prisma = new PrismaClient();
 
 export const getUsers = catchAsyncErrors(async (req: Request, res: Response) => {
-  const users = await prisma.user.findMany({});
+  const resPerPage = 10;
+  const pageNumber = (req.query.pageNumber as unknown as number) || 0;
+  const totalCount = await prisma.user.count({});
+  const users = await prisma.user.findMany({
+    skip: (pageNumber - 1) * resPerPage,
+    take: +resPerPage,
+  });
   users.forEach((user) => {
     excludeKey(user, ['password']);
   });
   res.status(200).json({
     success: true,
+    totalCount,
+    resPerPage,
+    pageNumber,
     users,
   });
 });
