@@ -10,7 +10,10 @@ export const getRandomTutorials = catchAsyncErrors(async (req: Request, res: Res
     skip: randomvalue,
     take: 10,
   });
-  res.send(tutorials);
+  res.send({
+    success: true,
+    tutorials,
+  });
 });
 
 // /api/v1/tutorial/videoId
@@ -22,5 +25,5 @@ export const getTutorial = catchAsyncErrors(async (req: Request, res: Response, 
       url: videoUrl,
     },
   });
-  res.send(tutorial);
+  res.send({ success: true, tutorial });
 });

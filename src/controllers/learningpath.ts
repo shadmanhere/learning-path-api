@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 
 export const getPaths = catchAsyncErrors(async (req: Request, res: Response) => {
   const learningPaths = await prisma.learningPath.findMany({});
-  res.send(learningPaths);
+  res.send({ success: true, learningPaths });
 });
 
 export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
@@ -32,7 +32,10 @@ export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
       },
     },
   });
-  res.send(learningPath);
+  res.send({
+    success: true,
+    learningPath,
+  });
 });
 
 export const addPath = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
@@ -46,5 +49,8 @@ export const addPath = catchAsyncErrors(async (req: Request, res: Response, next
       name,
     },
   });
-  res.send(learningPath);
+  res.send({
+    success: true,
+    learningPath,
+  });
 });
