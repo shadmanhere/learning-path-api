@@ -27,3 +27,16 @@ export const getTutorial = catchAsyncErrors(async (req: Request, res: Response, 
   });
   res.send({ success: true, tutorial });
 });
+
+// Admin
+export const addTutorial = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { title, url, image_url } = req.body;
+  const tutorial = await prisma.tutorial.create({
+    data: {
+      title,
+      url,
+      image_url,
+    },
+  });
+  res.status(200).json({ success: true, tutorial });
+});
