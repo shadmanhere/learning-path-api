@@ -203,7 +203,7 @@ export const updateProfile = catchAsyncErrors(async (req: CustomRequest, res: Re
     lastName: req.body.lastName,
   };
 
-  await prisma.user.update({
+  const user = await prisma.user.update({
     where: {
       id: req?.user?.id,
     },
@@ -215,8 +215,11 @@ export const updateProfile = catchAsyncErrors(async (req: CustomRequest, res: Re
     },
   });
 
+  const userWithoutPassword = excludeKey(user, ['password']);
+
   res.status(200).json({
     success: true,
+    user: userWithoutPassword,
   });
 });
 
