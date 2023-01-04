@@ -21,6 +21,7 @@ model User {
   role                Role      @default(USER)
   resetPasswordToken  String?
   resetPasswordExpire DateTime?
+  Chapter Chapter[]
 }
 
 enum Role {
@@ -63,4 +64,5 @@ model Chapter {
   image_url   String
   Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])
   tutorial_id Int?
+  User User[]
 }
