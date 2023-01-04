@@ -11,14 +11,14 @@ datasource db {
 }
 
 model User {
-  id                  Int      @id @default(autoincrement())
-  createdAt           DateTime @default(now())
-  email               String   @unique
-  username            String   @unique
+  id                  Int       @id @default(autoincrement())
+  createdAt           DateTime  @default(now())
+  email               String    @unique
+  username            String    @unique
   firstName           String
   lastName            String
   password            String /// @encrypted <- annotate fields to encryp
-  role                Role     @default(USER)
+  role                Role      @default(USER)
   resetPasswordToken  String?
   resetPasswordExpire DateTime?
 }
@@ -51,4 +51,16 @@ model Tutorial {
   url       String
   image_url String
   Section   Section[]
+  Chapter   Chapter[]
+}
+
+model Chapter {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  title       String    @unique
+  url_start   String
+  url_end     String
+  image_url   String
+  Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])
+  tutorial_id Int?
 }
