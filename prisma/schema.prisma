@@ -22,6 +22,8 @@ model User {
   resetPasswordToken  String?
   resetPasswordExpire DateTime?
   Chapter Chapter[]
+
+  @@map("user")
 }
 
 enum Role {
@@ -34,6 +36,8 @@ model LearningPath {
   createdAt DateTime  @default(now())
   name      String    @unique
   Section   Section[]
+
+  @@map("learningpath")
 }
 
 model Section {
@@ -43,6 +47,8 @@ model Section {
   tutorials      Tutorial[]
   LearningPath   LearningPath? @relation(fields: [learningPathId], references: [id])
   learningPathId Int?
+
+  @@map("section")
 }
 
 model Tutorial {
@@ -53,6 +59,8 @@ model Tutorial {
   image_url String
   Section   Section[]
   Chapter   Chapter[]
+
+  @@map("tutorial")
 }
 
 model Chapter {
@@ -65,4 +73,6 @@ model Chapter {
   Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])
   tutorial_id Int?
   User User[]
+
+  @@map("chapter")
 }
