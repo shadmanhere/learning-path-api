@@ -11,67 +11,82 @@ datasource db {
 }
 
 model User {
-  id                  Int       @id @default(autoincrement())
-  createdAt           DateTime  @default(now())
-  email               String    @unique
-  username            String    @unique
-  firstName           String
-  lastName            String
-  password            String /// @encrypted <- annotate fields to encryp
-  role                Role      @default(USER)
-  resetPasswordToken  String?
-  resetPasswordExpire DateTime?
-  Chapter             Chapter[]
+  id                  Int       @id @default(autoincrement()) @map("id")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  email               String    @unique @map("email")
+  username            String    @unique @map("username")
+  firstName           String    @map("first_name")
+  lastName            String    @map("last_name")
+  password            String    @map("password") /// @encrypted <- annotate fields to encryp
+  role                Role      @default(USER) @map("role")
+  resetPasswordToken  String?   @map("reset_password_token")
+  resetPasswordExpire DateTime? @map("reset_password_expire")
+
+  Chapter   Chapter? @relation(fields: [chapterId], references: [id])
+  chapterId Int?     @map("chapter_id")
+
+  @@map("users")
 }
 
 enum Role {
   USER
   ADMIN
+
+  @@map("user_role")
 }
 
 model LearningPath {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  name      String    @unique
+  id        Int       @id @default(autoincrement()) @map("id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  name      String    @unique @map("name")
   Section   Section[]
+
+  @@map("learning_paths")
 }
 
 model Section {
-  id                Int                 @id @default(autoincrement())
-  createdAt         DateTime            @default(now())
-  name              String
+  id                Int                 @id @default(autoincrement()) @map("id")
+  createdAt         DateTime            @default(now()) @map("created_at")
+  name              String              @map("name")
   LearningPath      LearningPath?       @relation(fields: [learningPathId], references: [id])
-  learningPathId    Int?
+  learningPathId    Int?                @map("learning_path_id")
   SectionToTutorial SectionToTutorial[]
+
+  @@map("sections")
 }
 
 model Tutorial {
-  id                Int                 @id @default(autoincrement())
-  createdAt         DateTime            @default(now())
-  title             String              @unique
-  url               String
-  image_url         String
+  id                Int                 @id @default(autoincrement()) @map("id")
+  createdAt         DateTime            @default(now()) @map("created_at")
+  title             String              @unique @map("title")
+  url               String              @map("url")
+  imageUrl          String              @map("image_url")
   Chapter           Chapter[]
   SectionToTutorial SectionToTutorial[]
+
+  @@map("tutorials")
 }
 
 model SectionToTutorial {
-  Section    Section   @relation(fields: [sectionId], references: [id])
-  sectionId  Int
+  Section    Section  @relation(fields: [sectionId], references: [id])
+  sectionId  Int      @map("section_id")
   Tutorial   Tutorial @relation(fields: [tutorialId], references: [id])
-  tutorialId Int
+  tutorialId Int      @map("tutorial_id")
 
   @@id([sectionId, tutorialId])
+  @@map("sections_to_tutorials")
 }
 
 model Chapter {
-  id          Int       @id @default(autoincrement())
-  createdAt   DateTime  @default(now())
-  title       String    @unique
-  url_start   String
-  url_end     String
-  image_url   String
-  Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])
-  tutorial_id Int?
-  User        User[]
+  id         Int       @id @default(autoincrement()) @map("id")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  title      String    @unique @map("title")
+  urlStart   String    @map("url_start")
+  urlEnd     String    @map("url_end")
+  imageUrl   String    @map("image_url")
+  Tutorial   Tutorial? @relation(fields: [tutorialId], references: [id])
+  tutorialId Int?      @map("tutorial_id")
+  User       User[]
+
+  @@map("chapters")
 }
