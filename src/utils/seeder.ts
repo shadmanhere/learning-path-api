@@ -1,46 +1,44 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PrismaClient } from '@prisma/client';
-import axios from 'axios';
+import { learningpaths } from '../data/learningpaths';
+import { sections } from '../data/sections';
+import { tutorials } from '../data/tutorials';
+import { sectiontotutorials } from '../data/sectiontotutorials';
 
 const prisma = new PrismaClient();
 
-export const fetchData = async () =>
-  await axios.get('https://raw.githubusercontent.com/shadmanhere/learning-path-data/main/programming-data/api/v2/list-of-paths.json');
+export const seeder = async () => {
+  await prisma.learningPath
+    .createMany({
+      data: learningpaths,
+    })
+    .catch((reason: any) => {
+      console.error(reason);
+    });
 
-const createMany = async () => {
-  const { data } = await fetchData();
-  const dataObj: { name: string }[] = [];
-  data.forEach((pathName: string) => {
-    dataObj.push({ name: pathName });
-  });
-  await prisma.learningPath.deleteMany();
-  await prisma.learningPath.createMany({
-    data: dataObj,
-    skipDuplicates: true,
-  });
+  await prisma.tutorial
+    .createMany({
+      data: tutorials,
+    })
+    .catch((reason: any) => {
+      console.error(reason);
+    });
+
+  await prisma.section
+    .createMany({
+      data: sections,
+    })
+    .catch((reason: any) => {
+      console.error(reason);
+    });
+
+  await prisma.sectionToTutorial
+    .createMany({
+      data: sectiontotutorials,
+    })
+    .catch((reason: any) => {
+      console.error(reason);
+    });
 };
 
-// createMany();
-
-export const fetchTutorial = async () =>
-  await axios.get('https://raw.githubusercontent.com/shadmanhere/learning-path-data/main/programming-data/api/v2/software-tester.json');
-
-const updateTutorial = async () => {
-  const { data } = await fetchTutorial();
-  const tutorials: { title: string; url: string; image_url: string }[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data.forEach((dataObj: any) =>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dataObj.section.tutorials.forEach((tutorial: any) => {
-      tutorial.image_url = tutorial.thumbnail;
-      delete tutorial.thumbnail;
-      tutorials.push(tutorial);
-    }),
-  );
-  await prisma.tutorial.createMany({
-    data: tutorials,
-    skipDuplicates: true,
-  });
-};
-
-updateTutorial();
+seeder();

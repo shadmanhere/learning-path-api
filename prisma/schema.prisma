@@ -21,9 +21,7 @@ model User {
   role                Role      @default(USER)
   resetPasswordToken  String?
   resetPasswordExpire DateTime?
-  Chapter Chapter[]
-
-  @@map("user")
+  Chapter             Chapter[]
 }
 
 enum Role {
@@ -36,31 +34,34 @@ model LearningPath {
   createdAt DateTime  @default(now())
   name      String    @unique
   Section   Section[]
-
-  @@map("learningpath")
 }
 
 model Section {
-  id             Int           @id @default(autoincrement())
-  createdAt      DateTime      @default(now())
-  name           String
-  tutorials      Tutorial[]
-  LearningPath   LearningPath? @relation(fields: [learningPathId], references: [id])
-  learningPathId Int?
-
-  @@map("section")
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime            @default(now())
+  name              String
+  LearningPath      LearningPath?       @relation(fields: [learningPathId], references: [id])
+  learningPathId    Int?
+  SectionToTutorial SectionToTutorial[]
 }
 
 model Tutorial {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  title     String    @unique
-  url       String
-  image_url String
-  Section   Section[]
-  Chapter   Chapter[]
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime            @default(now())
+  title             String              @unique
+  url               String
+  image_url         String
+  Chapter           Chapter[]
+  SectionToTutorial SectionToTutorial[]
+}
 
-  @@map("tutorial")
+model SectionToTutorial {
+  Section    Section   @relation(fields: [sectionId], references: [id])
+  sectionId  Int
+  Tutorial   Tutorial @relation(fields: [tutorialId], references: [id])
+  tutorialId Int
+
+  @@id([sectionId, tutorialId])
 }
 
 model Chapter {
@@ -72,7 +73,5 @@ model Chapter {
   image_url   String
   Tutorial    Tutorial? @relation(fields: [tutorial_id], references: [id])
   tutorial_id Int?
-  User User[]
-
-  @@map("chapter")
+  User        User[]
 }
