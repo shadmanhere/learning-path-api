@@ -4,6 +4,7 @@ import { learningpaths } from '../data/learningpaths';
 import { sections } from '../data/sections';
 import { tutorials } from '../data/tutorials';
 import { sectiontotutorials } from '../data/sectiontotutorials';
+import { title } from 'process';
 
 const prisma = new PrismaClient();
 
@@ -16,9 +17,12 @@ export const seeder = async () => {
       console.error(reason);
     });
 
+  const newTutorials = tutorials.map((tutorial) => {
+    return { title: tutorial.title, url: tutorial.url, imageUrl: tutorial.image_url };
+  });
   await prisma.tutorial
     .createMany({
-      data: tutorials,
+      data: newTutorials,
     })
     .catch((reason: any) => {
       console.error(reason);

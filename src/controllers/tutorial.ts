@@ -35,7 +35,7 @@ export const addTutorial = catchAsyncErrors(async (req: Request, res: Response, 
     data: {
       title,
       url,
-      image_url,
+      imageUrl: image_url,
     },
   });
   res.status(200).json({ success: true, tutorial });
