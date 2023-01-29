@@ -27,7 +27,11 @@ export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
     include: {
       Section: {
         include: {
-          tutorials: true,
+          SectionToTutorial: {
+            include: {
+              Tutorial: true,
+            },
+          },
         },
       },
     },
