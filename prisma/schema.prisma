@@ -35,11 +35,20 @@ enum Role {
   @@map("user_role")
 }
 
+model Category {
+  id                     Int                      @id @default(autoincrement()) @map("id")
+  name                   String                   @map("name")
+  CategoryToLearningPath CategoryToLearningPath[]
+
+  @@map("categories")
+}
+
 model LearningPath {
-  id        Int       @id @default(autoincrement()) @map("id")
-  createdAt DateTime  @default(now()) @map("created_at")
-  name      String    @unique @map("name")
-  Section   Section[]
+  id                     Int                      @id @default(autoincrement()) @map("id")
+  createdAt              DateTime                 @default(now()) @map("created_at")
+  name                   String                   @unique @map("name")
+  Section                Section[]
+  CategoryToLearningPath CategoryToLearningPath[]
 
   @@map("learning_paths")
 }
@@ -75,6 +84,16 @@ model SectionToTutorial {
 
   @@id([sectionId, tutorialId])
   @@map("sections_to_tutorials")
+}
+
+model CategoryToLearningPath {
+  Category      Category     @relation(fields: [categoryId], references: [id])
+  categoryId    Int          @map("category_id")
+  LearningPath  LearningPath @relation(fields: [learninPathId], references: [id])
+  learninPathId Int          @map("learning_path_id")
+
+  @@id([categoryId, learninPathId])
+  @@map("category_to_learning_path")
 }
 
 model Chapter {
