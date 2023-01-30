@@ -894,4 +894,54 @@ export const tutorials = [
     url: 'https://www.youtube.com/watch?v=piGUa70sbWQ',
     image_url: 'https://img.youtube.com/vi/piGUa70sbWQ/0.jpg',
   },
+  {
+    title: 'L41: Non Co-operation & Khilaafat Movements l Modern History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=1j9hLVQ56cs',
+    image_url: 'https://img.youtube.com/vi/1j9hLVQ56cs/0.jpg',
+  },
+  {
+    title: 'L42: The Swaraj Party l No-Changers vs Pro-Changers l Modern History | UPSC CSE l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=217D7EnoaU',
+    image_url: 'https://img.youtube.com/vi/217D7EnoaU/0.jpg',
+  },
+  {
+    title: 'L43: Revolutionary Nationalism Part 2 | Bhagat Singh & HRA | Modern History | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=LWMAfugL8Og',
+    image_url: 'https://img.youtube.com/vi/LWMAfugL8Og/0.jpg',
+  },
+  {
+    title: 'L44: Simon Commission & Poorna Swaraj Resolution l Modern History | Dr Mahipal Rathore l UPSC CSE',
+    url: 'https://www.youtube.com/watch?v=h0boYviTEXE',
+    image_url: 'https://img.youtube.com/vi/h0boYviTEXE/0.jpg',
+  },
+  {
+    title: 'L45: Civil Disobedience Movement l Modern History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=5LOqE-aRemo',
+    image_url: 'https://img.youtube.com/vi/5LOqE-aRemo/0.jpg',
+  },
+  {
+    title: 'L46: Round Table Conferences l Modern History | Dr Mahipal Rathore l UPSC CSE',
+    url: 'https://www.youtube.com/watch?v=I2vEDo1L46c',
+    image_url: 'https://img.youtube.com/vi/I2vEDo1L46c/0.jpg',
+  },
+  {
+    title: `L47: Communal Award l Poona Pact l Comparison of Ambedkar & Gandhi's Ideology l Dr Mahipal Rathore`,
+    url: 'https://www.youtube.com/watch?v=KVDGy9HkBL8',
+    image_url: 'https://img.youtube.com/vi/KVDGy9HkBL8/0.jpg',
+  },
+  {
+    title: 'L48: Right vs Left in Congress l Government of India Act 1935 l Modern History l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=pHq2Kv7QH1c',
+    image_url: 'https://img.youtube.com/vi/pHq2Kv7QH1c/0.jpg',
+  },
+  {
+    title: 'L49: Provincial Elections of 1937 & The Congress Ministries l Modern History l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=mBaUlNfaNPM',
+    image_url: 'https://img.youtube.com/vi/mBaUlNfaNPM/0.jpg',
+  },
+  {
+    title: 'L50: Gandhi vs Bose l Tripuri Crisis of Congress 1939 l Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=iAX_a5hbBHk',
+    image_url: 'https://img.youtube.com/vi/iAX_a5hbBHk/0.jpg',
+  },
 ];
