@@ -690,11 +690,6 @@ export const tutorials = [
     image_url: 'https://img.youtube.com/vi/xta6bpOgzUY/0.jpg',
   },
   {
-    title: 'Selenium Java Training - Session 36 - Congrats for Course Completion - Refer additional videos',
-    url: 'https://www.youtube.com/watch?v=xta6bpOgzUY',
-    image_url: 'https://img.youtube.com/vi/xta6bpOgzUY/0.jpg',
-  },
-  {
     title: 'L1: India at the dawn of Colonisation | Modern Indian History | UPSC CSE | Dr Mahipal Rathore',
     url: 'https://www.youtube.com/watch?v=6Q20H0tpxmA',
     image_url: 'https://img.youtube.com/vi/6Q20H0tpxmA/0.jpg',

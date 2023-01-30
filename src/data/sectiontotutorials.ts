@@ -1,5 +1,5 @@
 export const sectiontotutorials = [
-  // { sectionId: 1, tutorialId: 1 },
+  { sectionId: 1, tutorialId: 1 },
   { sectionId: 1, tutorialId: 2 },
   { sectionId: 1, tutorialId: 3 },
   { sectionId: 2, tutorialId: 4 },
