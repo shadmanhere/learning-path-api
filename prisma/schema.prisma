@@ -91,10 +91,10 @@ model SectionToTutorial {
 model CategoryToLearningPath {
   Category      Category     @relation(fields: [categoryId], references: [id])
   categoryId    Int          @map("category_id")
-  LearningPath  LearningPath @relation(fields: [learninPathId], references: [id])
-  learninPathId Int          @map("learning_path_id")
+  LearningPath  LearningPath @relation(fields: [learningPathId], references: [id])
+  learningPathId Int          @map("learning_path_id")
 
-  @@id([categoryId, learninPathId])
+  @@id([categoryId, learningPathId])
   @@map("categories_to_learning_paths")
 }
 
