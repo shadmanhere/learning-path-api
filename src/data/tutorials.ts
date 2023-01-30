@@ -689,4 +689,159 @@ export const tutorials = [
     url: 'https://www.youtube.com/watch?v=xta6bpOgzUY',
     image_url: 'https://img.youtube.com/vi/xta6bpOgzUY/0.jpg',
   },
+  {
+    title: 'Selenium Java Training - Session 36 - Congrats for Course Completion - Refer additional videos',
+    url: 'https://www.youtube.com/watch?v=xta6bpOgzUY',
+    image_url: 'https://img.youtube.com/vi/xta6bpOgzUY/0.jpg',
+  },
+  {
+    title: 'L1: India at the dawn of Colonisation | Modern Indian History | UPSC CSE | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=6Q20H0tpxmA',
+    image_url: 'https://img.youtube.com/vi/6Q20H0tpxmA/0.jpg',
+  },
+  {
+    title: 'L2: India at the dawn of Colonisation | Modern Indian History | UPSC CSE 2022 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=pMpevGOo9is',
+    image_url: 'https://img.youtube.com/vi/pMpevGOo9is/0.jpg',
+  },
+  {
+    title: 'L3: Advent of Europeans - Part 1 | Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=1yuybAqQDeY',
+    image_url: 'https://img.youtube.com/vi/1yuybAqQDeY/0.jpg',
+  },
+  {
+    title: 'L4: Advent of Europeans - Part 2 | Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=UKqBmXsyvnY',
+    image_url: 'https://img.youtube.com/vi/UKqBmXsyvnY/0.jpg',
+  },
+  {
+    title: 'L5: Carnatic Wars | Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=4bRRl3MXGwA',
+    image_url: 'https://img.youtube.com/vi/4bRRl3MXGwA/0.jpg',
+  },
+  {
+    title: 'L6: Battles of Plassey and Buxar | Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=wy6v6I-HY6E',
+    image_url: 'https://img.youtube.com/vi/wy6v6I-HY6E/0.jpg',
+  },
+  {
+    title: 'L7: 3rd Battle of Panipat + Rohillas l Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=EaZzmH-b03Q',
+    image_url: 'https://img.youtube.com/vi/EaZzmH-b03Q/0.jpg',
+  },
+  {
+    title: 'L8: Anglo Mysore Wars l Tipu Sultan l Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=2b2t6cqnv-o',
+    image_url: 'https://img.youtube.com/vi/2b2t6cqnv-o/0.jpg',
+  },
+  {
+    title: 'L9: Anglo Maratha Wars l Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=gUK5eggn34Y',
+    image_url: 'https://img.youtube.com/vi/gUK5eggn34Y/0.jpg',
+  },
+  {
+    title: 'L10: Anglo Nepal and Anglo Burma Wars l Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=X_t7DDrYtiE',
+    image_url: 'https://img.youtube.com/vi/X_t7DDrYtiE/0.jpg',
+  },
+  {
+    title: 'L11: Annexation of Sindh + Anglo Sikh Wars l Modern Indian History | UPSC CSE 2021 | Dr Mahipal',
+    url: 'https://www.youtube.com/watch?v=yIAmi_9BW8E',
+    image_url: 'https://img.youtube.com/vi/yIAmi_9BW8E/0.jpg',
+  },
+  {
+    title: 'L12: Subsidiary Alliance l Doctrine of Lapse l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal',
+    url: 'https://www.youtube.com/watch?v=ARuRpGDvHz4',
+    image_url: 'https://img.youtube.com/vi/ARuRpGDvHz4/0.jpg',
+  },
+  {
+    title: 'L13 : Warren Hastings l Regulating Act 1773 l Modern Indian History | UPSC CSE 2021',
+    url: 'https://www.youtube.com/watch?v=IOnzkAvTRYo',
+    image_url: 'https://img.youtube.com/vi/IOnzkAvTRYo/0.jpg',
+  },
+  {
+    title: 'L14 : Cornwallis and his Reforms l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=S22PIq91zhY',
+    image_url: 'https://img.youtube.com/vi/S22PIq91zhY/0.jpg',
+  },
+  {
+    title: 'L15: Reforms of Bentick l Charter Acts l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=JhFkJeXeW9s',
+    image_url: 'https://img.youtube.com/vi/JhFkJeXeW9s/0.jpg',
+  },
+  {
+    title: 'L16: Dalhousie l Charter Act 1853 l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=2X9NvH4Dkoo',
+    image_url: 'https://img.youtube.com/vi/2X9NvH4Dkoo/0.jpg',
+  },
+  {
+    title: 'L17: Land Reforms by British l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=jE_Y2pIiSkk',
+    image_url: 'https://img.youtube.com/vi/jE_Y2pIiSkk/0.jpg',
+  },
+  {
+    title: 'L18: Economic Policy of British l Collapse of Rural Economy l Modern Indian History | UPSC CSE 2021',
+    url: 'https://www.youtube.com/watch?v=BvcjNWQ2yC0',
+    image_url: 'https://img.youtube.com/vi/BvcjNWQ2yC0/0.jpg',
+  },
+  {
+    title: 'L19: Peasant Revolts Before 1857 l Modern Indian History | UPSC CSE 2021',
+    url: 'https://www.youtube.com/watch?v=EU48LWRajoQ',
+    image_url: 'https://img.youtube.com/vi/EU48LWRajoQ/0.jpg',
+  },
+  {
+    title: 'L20: Tribal Revolts Before 1857 l Santhal Revolt l Modern Indian History | UPSC CSE 2021',
+    url: 'https://www.youtube.com/watch?v=0Bm9Hqggqfo',
+    image_url: 'https://img.youtube.com/vi/0Bm9Hqggqfo/0.jpg',
+  },
+  {
+    title: 'L21: Revolts by Princes and Zamindars Before 1857 l Modern Indian History | UPSC CSE 2021',
+    url: 'https://www.youtube.com/watch?v=sFEaAG53tvY',
+    image_url: 'https://img.youtube.com/vi/sFEaAG53tvY/0.jpg',
+  },
+  {
+    title: 'L22: Revolt of 1857 - Causes + Events l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=RnFcfXjbs4g',
+    image_url: 'https://img.youtube.com/vi/RnFcfXjbs4g/0.jpg',
+  },
+  {
+    title: 'L23: Impact of Revolt of 1857 l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=nwR1uPgsg9o',
+    image_url: 'https://img.youtube.com/vi/nwR1uPgsg9o/0.jpg',
+  },
+  {
+    title: 'L24: Mayo, Lytton and Famine Policy l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=xic1wJv4ZMA',
+    image_url: 'https://img.youtube.com/vi/xic1wJv4ZMA/0.jpg',
+  },
+  {
+    title: 'L25: Ripon, Factory Acts & Ilbert Bill l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=EQ8cRWSV-Nw',
+    image_url: 'https://img.youtube.com/vi/EQ8cRWSV-Nw/0.jpg',
+  },
+  {
+    title: 'L26: Social reform Movements Part 1 l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=HSQSdgCj0ww',
+    image_url: 'https://img.youtube.com/vi/HSQSdgCj0ww/0.jpg',
+  },
+  {
+    title: 'L27: Social reform Movements Part 2 l Modern Indian History | UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=TFKsxFa1tKg',
+    image_url: 'https://img.youtube.com/vi/TFKsxFa1tKg/0.jpg',
+  },
+  {
+    title: 'L28: Social reform Movements Part 3 l Modern Indian History | #UPSC CSE 2021 l Dr. Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=aduFoPGVX4c',
+    image_url: 'https://img.youtube.com/vi/aduFoPGVX4c/0.jpg',
+  },
+  {
+    title: 'L29: Nationalism & Formation of Congress l Modern History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=2pgaZmKLn2E',
+    image_url: 'https://img.youtube.com/vi/2pgaZmKLn2E/0.jpg',
+  },
+  {
+    title: 'L30: National Movement l Era of Moderates l Modern History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=qqjTVLx-dY4',
+    image_url: 'https://img.youtube.com/vi/qqjTVLx-dY4/0.jpg',
+  },
 ];
