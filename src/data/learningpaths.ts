@@ -4,4 +4,5 @@ export const learningpaths = [
   { name: 'Vuejs Developer' },
   { name: 'Java Developer' },
   { name: 'Software Tester' },
+  { name: 'Modern Indian History' },
 ];

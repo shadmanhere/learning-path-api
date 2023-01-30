@@ -844,4 +844,54 @@ export const tutorials = [
     url: 'https://www.youtube.com/watch?v=qqjTVLx-dY4',
     image_url: 'https://img.youtube.com/vi/qqjTVLx-dY4/0.jpg',
   },
+  {
+    title: 'L31: Partition of Bengal l Swadeshi Movement l Modern History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=sk0ZUTwHBD4',
+    image_url: 'https://img.youtube.com/vi/sk0ZUTwHBD4/0.jpg',
+  },
+  {
+    title: 'L32: Anglo Afghan Wars l The Great Game l Modern Indian History | UPSC CSE 2021 | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=B-0lhQfltCY',
+    image_url: 'https://img.youtube.com/vi/B-0lhQfltCY/0.jpg',
+  },
+  {
+    title: 'L33: Revolutionary Nationalism Part 1 l Modern History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=CfcxfzB553g',
+    image_url: 'https://img.youtube.com/vi/CfcxfzB553g/0.jpg',
+  },
+  {
+    title: 'L34: Minto Morley Reforms l Modern History | UPSC CSE 2021/2022/2023 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=dO2W294I97I',
+    image_url: 'https://img.youtube.com/vi/dO2W294I97I/0.jpg',
+  },
+  {
+    title: 'L35: Home Rule Movement l Lucknow Pact l National Movement l Modern History | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=dIu2kXNbNtA',
+    image_url: 'https://img.youtube.com/vi/dIu2kXNbNtA/0.jpg',
+  },
+  {
+    title: 'L36: Peasant Revolts after 1857 l Modern History | Dr Mahipal Rathore l UPSC CSE 2021',
+    url: 'https://www.youtube.com/watch?v=GkdbAX0HLhE',
+    image_url: 'https://img.youtube.com/vi/GkdbAX0HLhE/0.jpg',
+  },
+  {
+    title: 'L37: Gandhi in South Africa l Modern Indian History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=Iwsq609qOno',
+    image_url: 'https://img.youtube.com/vi/Iwsq609qOno/0.jpg',
+  },
+  {
+    title: 'L38: Entry of Gandhi in National Movement l Modern Indian History | UPSC CSE 2021 l Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=9G2YXdYG5D0',
+    image_url: 'https://img.youtube.com/vi/9G2YXdYG5D0/0.jpg',
+  },
+  {
+    title: 'L39: Rowlatt Act and Jallianwala Bagh Massacre l Modern History | Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=9y4-EJVL21s',
+    image_url: 'https://img.youtube.com/vi/9y4-EJVL21s/0.jpg',
+  },
+  {
+    title: 'L40: Montagu Chelmsford Reforms l Modern History | UPSC CSE 2021 l Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=piGUa70sbWQ',
+    image_url: 'https://img.youtube.com/vi/piGUa70sbWQ/0.jpg',
+  },
 ];
