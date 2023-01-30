@@ -4,7 +4,7 @@ import { learningpaths } from '../data/learningpaths';
 import { sections } from '../data/sections';
 import { tutorials } from '../data/tutorials';
 import { sectiontotutorials } from '../data/sectiontotutorials';
-import { title } from 'process';
+import { categories } from '../data/categories';
 
 const prisma = new PrismaClient();
 
@@ -12,6 +12,14 @@ export const seeder = async () => {
   await prisma.learningPath
     .createMany({
       data: learningpaths,
+    })
+    .catch((reason: any) => {
+      console.error(reason);
+    });
+
+  await prisma.category
+    .createMany({
+      data: categories,
     })
     .catch((reason: any) => {
       console.error(reason);

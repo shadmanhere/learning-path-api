@@ -1,1 +1,1 @@
-export const learningpaths = [{ name: 'tech' }, { name: 'upsc' }];
+export const categories = [{ name: 'tech' }, { name: 'upsc' }];
