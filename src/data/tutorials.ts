@@ -944,4 +944,39 @@ export const tutorials = [
     url: 'https://www.youtube.com/watch?v=iAX_a5hbBHk',
     image_url: 'https://img.youtube.com/vi/iAX_a5hbBHk/0.jpg',
   },
+  {
+    title: 'L51: Nationalist Response to WW2 l The Demand for Pakistan l Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=CxtE3Yv5qSI',
+    image_url: 'https://img.youtube.com/vi/CxtE3Yv5qSI/0.jpg',
+  },
+  {
+    title: 'L52: August Offer, Individual Satyagraha & Cripps Mission | Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=gpzCMWDnnhE',
+    image_url: 'https://img.youtube.com/vi/gpzCMWDnnhE/0.jpg',
+  },
+  {
+    title: 'L53: Quit India Movement | Famine of Bengal 1943 l Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=tXNmt37Aa8c',
+    image_url: 'https://img.youtube.com/vi/tXNmt37Aa8c/0.jpg',
+  },
+  {
+    title: 'L54: Subhash Chandra Bose & Indian National Army l Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=mURjVafLLm4',
+    image_url: 'https://img.youtube.com/vi/mURjVafLLm4/0.jpg',
+  },
+  {
+    title: 'L55: Rajaji Formula l Gandhi Jinnah Talks l Wavell Plan l Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=CdgxJEUP7mI',
+    image_url: 'https://img.youtube.com/vi/CdgxJEUP7mI/0.jpg',
+  },
+  {
+    title: 'L56: Cabinet Mission, Constituent Assembly, Direct Action Day l Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=0BvnsVcpKY8',
+    image_url: 'https://img.youtube.com/vi/0BvnsVcpKY8/0.jpg',
+  },
+  {
+    title: 'L57: Plan Balkan, Mountbatten Plan, Independence & Partition l Modern History by Dr Mahipal Rathore',
+    url: 'https://www.youtube.com/watch?v=VjZWT3risRA',
+    image_url: 'https://img.youtube.com/vi/VjZWT3risRA/0.jpg',
+  },
 ];
