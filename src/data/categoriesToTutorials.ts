@@ -1,5 +1,5 @@
 export const categoriesToTutorials = [
-  // { categoryId: 1, tutorialId: 1 },
+  { categoryId: 1, tutorialId: 1 },
   { categoryId: 1, tutorialId: 2 },
   { categoryId: 1, tutorialId: 3 },
   { categoryId: 1, tutorialId: 4 },
