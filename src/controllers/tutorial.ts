@@ -5,8 +5,21 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const getRandomTutorials = catchAsyncErrors(async (req: Request, res: Response) => {
-  const randomvalue = Math.floor(Math.random() * 5);
+  const category = req.header('App-Name');
+  const totalTutorials = await prisma.tutorial.count({
+    where: {
+      CategoryToTutorial: {
+        some: { Category: { name: category } },
+      },
+    },
+  });
+  const randomvalue = Math.floor(Math.random() * (totalTutorials - 10));
   const tutorials = await prisma.tutorial.findMany({
+    where: {
+      CategoryToTutorial: {
+        some: { Category: { name: category } },
+      },
+    },
     skip: randomvalue,
     take: 10,
   });

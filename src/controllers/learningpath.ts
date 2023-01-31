@@ -8,11 +8,19 @@ import ErrorHandler from '../utils/errorHandler';
 const prisma = new PrismaClient();
 
 export const getPaths = catchAsyncErrors(async (req: Request, res: Response) => {
-  const learningPaths = await prisma.learningPath.findMany({});
+  const category = req.header('App-Name');
+  const learningPaths = await prisma.learningPath.findMany({
+    where: {
+      CategoryToLearningPath: {
+        some: { Category: { name: category } },
+      },
+    },
+  });
   res.send({ success: true, learningPaths });
 });
 
 export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
+  const category = req.header('App-Name');
   const pathName = req.params.pathname.split('-').join(' ');
   const pathNameCapitalized = pathName
     .split(' ')
@@ -23,6 +31,9 @@ export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
   const learningPath = await prisma.learningPath.findMany({
     where: {
       name: pathNameCapitalized,
+      CategoryToLearningPath: {
+        some: { Category: { name: category } },
+      },
     },
     include: {
       Section: {
