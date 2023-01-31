@@ -17,4 +17,5 @@ export const sections = [
   { name: 'Database Testing', learningPathId: 5 },
   { name: 'Automation Testing - Selenium Java Training', learningPathId: 5 },
   { name: 'API Testing', learningPathId: 5 },
+  { name: 'Modern Indian History', learningPathId: 6 },
 ];
