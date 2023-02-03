@@ -87,6 +87,7 @@ export const logout = catchAsyncErrors(async (req: CustomRequest, res: Response)
 
 export const forgotPassword = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
   const { email } = req.body;
+  const category = req.header('App-Name');
   if (!email) {
     return next(new ErrorHandler('Please enter email', 400));
   }
@@ -109,7 +110,10 @@ export const forgotPassword = catchAsyncErrors(async (req: CustomRequest, res: R
     },
   });
 
-  const resetUrl = `${process.env.FRONT_END_DOMAIN}/password/reset/${resetToken}`;
+  let frontEndDomain = process.env.FRONT_END_DOMAINS?.split(' ')[0];
+  if (category === 'upsc') frontEndDomain = process.env.FRONT_END_DOMAINS?.split(' ')[1];
+
+  const resetUrl = `${frontEndDomain}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
 
