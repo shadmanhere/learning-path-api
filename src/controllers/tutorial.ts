@@ -6,14 +6,14 @@ const prisma = new PrismaClient();
 
 export const getRandomTutorials = catchAsyncErrors(async (req: Request, res: Response) => {
   const category = req.header('App-Name');
-  const totalTutorials = await prisma.tutorial.count({
-    where: {
-      CategoryToTutorial: {
-        some: { Category: { name: category } },
-      },
-    },
-  });
-  const randomvalue = Math.floor(Math.random() * (totalTutorials - 10));
+  // const totalTutorials = await prisma.tutorial.count({
+  //   where: {
+  //     CategoryToTutorial: {
+  //       some: { Category: { name: category } },
+  //     },
+  //   },
+  // });
+  const randomvalue = Math.floor(Math.random() * 10);
   const tutorials = await prisma.tutorial.findMany({
     where: {
       CategoryToTutorial: {
