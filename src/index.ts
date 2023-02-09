@@ -9,6 +9,7 @@ import userRoutes from './routes/users';
 import tutorialsRoutes from './routes/tutorials';
 import sectionsRoutes from './routes/sections';
 import learningPathsRoute from './routes/learningpaths';
+import categoryRoute from './routes/category';
 
 import { errorHandler } from './middlewares/error';
 
@@ -45,6 +46,7 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/learningpath', learningPathsRoute);
 app.use('/api/v1/section', sectionsRoutes);
 app.use('/api/v1/tutorial', tutorialsRoutes);
+app.use('/api/v1/category', categoryRoute);
 
 const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
