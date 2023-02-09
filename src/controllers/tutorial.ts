@@ -53,3 +53,19 @@ export const addTutorial = catchAsyncErrors(async (req: Request, res: Response, 
   });
   res.status(200).json({ success: true, tutorial });
 });
+
+export const updateTutorial = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { id, title, url, image_url } = req.body;
+
+  const tutorial = await prisma.tutorial.update({
+    where: {
+      id: +id,
+    },
+    data: {
+      title,
+      url,
+      imageUrl: image_url,
+    },
+  });
+  res.status(200).json({ success: true, tutorial });
+});
