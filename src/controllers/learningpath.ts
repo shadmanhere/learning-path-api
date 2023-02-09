@@ -53,6 +53,7 @@ export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
   });
 });
 
+// Admin
 export const addPath = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
   if (!name) {
@@ -60,6 +61,26 @@ export const addPath = catchAsyncErrors(async (req: Request, res: Response, next
   }
 
   const learningPath = await prisma.learningPath.create({
+    data: {
+      name,
+    },
+  });
+  res.send({
+    success: true,
+    learningPath,
+  });
+});
+
+export const updatePath = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { id, name } = req.body;
+  if (!name) {
+    return next(new ErrorHandler('Please enter username & password', 400));
+  }
+
+  const learningPath = await prisma.learningPath.update({
+    where: {
+      id: +id,
+    },
     data: {
       name,
     },
