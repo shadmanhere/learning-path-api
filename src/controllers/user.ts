@@ -18,16 +18,26 @@ const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
 
 export const signin = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
 
   // Checks if email and password is entered by user
-  if (!username || !password) {
-    return next(new ErrorHandler('Please enter username & password', 400));
+  if (!username && !email) {
+    return next(new ErrorHandler('Please enter username or email', 400));
+  }
+  if (!password) {
+    return next(new ErrorHandler('Please enter password', 400));
   }
 
-  const existingUser = await prisma.user.findUnique({
+  const existingUser = await prisma.user.findFirst({
     where: {
-      username: username,
+      OR: [
+        {
+          username: username,
+        },
+        {
+          email: email,
+        },
+      ],
     },
   });
   if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
