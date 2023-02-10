@@ -57,7 +57,7 @@ export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
 export const addPath = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
   if (!name) {
-    return next(new ErrorHandler('Please enter username & password', 400));
+    return next(new ErrorHandler('Please enter learning path name', 400));
   }
 
   const learningPath = await prisma.learningPath.create({
@@ -74,7 +74,7 @@ export const addPath = catchAsyncErrors(async (req: Request, res: Response, next
 export const updatePath = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { id, name } = req.body;
   if (!name) {
-    return next(new ErrorHandler('Please enter username & password', 400));
+    return next(new ErrorHandler('Please enter learning path name', 400));
   }
 
   const learningPath = await prisma.learningPath.update({
