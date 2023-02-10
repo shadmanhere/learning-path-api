@@ -18,10 +18,10 @@ const prisma = new PrismaClient();
 prisma.$use(fieldEncryptionMiddleware());
 
 export const signin = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
-  const { username, password, email } = req.body;
+  const { usernameOrEmail, password } = req.body;
 
   // Checks if email and password is entered by user
-  if (!username && !email) {
+  if (!usernameOrEmail) {
     return next(new ErrorHandler('Please enter username or email', 400));
   }
   if (!password) {
@@ -32,10 +32,10 @@ export const signin = catchAsyncErrors(async (req: Request, res: Response, next:
     where: {
       OR: [
         {
-          username: username,
+          username: usernameOrEmail,
         },
         {
-          email: email,
+          email: usernameOrEmail,
         },
       ],
     },
