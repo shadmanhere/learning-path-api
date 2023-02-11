@@ -11,19 +11,17 @@ datasource db {
 }
 
 model User {
-  id                  Int       @id @default(autoincrement()) @map("id")
-  createdAt           DateTime  @default(now()) @map("created_at")
-  email               String    @unique @map("email")
-  username            String    @unique @map("username")
-  firstName           String    @map("first_name")
-  lastName            String    @map("last_name")
-  password            String    @map("password") /// @encrypted <- annotate fields to encryp
-  role                Role      @default(USER) @map("role")
-  resetPasswordToken  String?   @map("reset_password_token")
-  resetPasswordExpire DateTime? @map("reset_password_expire")
-
-  Chapter   Chapter? @relation(fields: [chapterId], references: [id])
-  chapterId Int?     @map("chapter_id")
+  id                  Int             @id @default(autoincrement()) @map("id")
+  createdAt           DateTime        @default(now()) @map("created_at")
+  email               String          @unique @map("email")
+  username            String          @unique @map("username")
+  firstName           String          @map("first_name")
+  lastName            String          @map("last_name")
+  password            String          @map("password") /// @encrypted <- annotate fields to encryp
+  role                Role            @default(USER) @map("role")
+  resetPasswordToken  String?         @map("reset_password_token")
+  resetPasswordExpire DateTime?       @map("reset_password_expire")
+  UserToChapter       UserToChapter[]
 
   @@map("users")
 }
@@ -89,9 +87,9 @@ model SectionToTutorial {
 }
 
 model CategoryToLearningPath {
-  Category      Category     @relation(fields: [categoryId], references: [id])
-  categoryId    Int          @map("category_id")
-  LearningPath  LearningPath @relation(fields: [learningPathId], references: [id])
+  Category       Category     @relation(fields: [categoryId], references: [id])
+  categoryId     Int          @map("category_id")
+  LearningPath   LearningPath @relation(fields: [learningPathId], references: [id])
   learningPathId Int          @map("learning_path_id")
 
   @@id([categoryId, learningPathId])
@@ -109,15 +107,25 @@ model CategoryToTutorial {
 }
 
 model Chapter {
-  id         Int       @id @default(autoincrement()) @map("id")
-  createdAt  DateTime  @default(now()) @map("created_at")
-  title      String    @unique @map("title")
-  urlStart   String    @map("url_start")
-  urlEnd     String    @map("url_end")
-  imageUrl   String    @map("image_url")
-  Tutorial   Tutorial? @relation(fields: [tutorialId], references: [id])
-  tutorialId Int?      @map("tutorial_id")
-  User       User[]
+  id            Int             @id @default(autoincrement()) @map("id")
+  createdAt     DateTime        @default(now()) @map("created_at")
+  title         String          @unique @map("title")
+  urlStart      String          @map("url_start")
+  urlEnd        String          @map("url_end")
+  imageUrl      String          @map("image_url")
+  Tutorial      Tutorial?       @relation(fields: [tutorialId], references: [id])
+  tutorialId    Int?            @map("tutorial_id")
+  UserToChapter UserToChapter[]
 
   @@map("chapters")
+}
+
+model UserToChapter {
+  Chapter   Chapter @relation(fields: [chapterId], references: [id])
+  chapterId Int     @map("chapter_id")
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    Int     @map("user_id")
+
+  @@id([chapterId, userId])
+  @@map("chapters_to_users")
 }
