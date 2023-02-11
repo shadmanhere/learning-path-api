@@ -21,7 +21,7 @@ model User {
   role                Role            @default(USER) @map("role")
   resetPasswordToken  String?         @map("reset_password_token")
   resetPasswordExpire DateTime?       @map("reset_password_expire")
-  UserToChapter       UserToChapter[]
+  ChapterToUser       ChapterToUser[]
 
   @@map("users")
 }
@@ -115,12 +115,12 @@ model Chapter {
   imageUrl      String          @map("image_url")
   Tutorial      Tutorial?       @relation(fields: [tutorialId], references: [id])
   tutorialId    Int?            @map("tutorial_id")
-  UserToChapter UserToChapter[]
+  ChapterToUser ChapterToUser[]
 
   @@map("chapters")
 }
 
-model UserToChapter {
+model ChapterToUser {
   Chapter   Chapter @relation(fields: [chapterId], references: [id])
   chapterId Int     @map("chapter_id")
   User      User?   @relation(fields: [userId], references: [id])
