@@ -21,12 +21,12 @@ export const errorHandler = (err: ErrorHandler | Prisma.PrismaClientKnownRequest
 
     error.message = err.message;
 
-    if (err?.meta?.target === 'User_username_key') {
+    if (err?.code === 'P2002' && err?.meta?.target === 'users_username_key') {
       const message = 'Username already exists';
       error = new ErrorHandler(message, 400);
     }
 
-    if (err?.meta?.target === 'User_email_key') {
+    if (err?.code === 'P2002' && err?.meta?.target === 'users_email_key') {
       const message = 'Email already exists';
       error = new ErrorHandler(message, 400);
     }
