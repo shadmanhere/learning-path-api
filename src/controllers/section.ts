@@ -62,3 +62,22 @@ export const updateSection = catchAsyncErrors(async (req: Request, res: Response
     section,
   });
 });
+
+export const deleteSection = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return next(new ErrorHandler('Please enter id', 400));
+  }
+
+  const deleteSection = await prisma.section.delete({
+    where: {
+      id: +id,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+    deleteSection,
+  });
+});
