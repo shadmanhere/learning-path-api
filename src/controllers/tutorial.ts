@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
+
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
+
+// util
+import ErrorHandler from '../utils/errorHandler';
 
 const prisma = new PrismaClient();
 
@@ -68,4 +72,23 @@ export const updateTutorial = catchAsyncErrors(async (req: Request, res: Respons
     },
   });
   res.status(200).json({ success: true, tutorial });
+});
+
+export const deleteTutorial = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return next(new ErrorHandler('Please enter id', 400));
+  }
+
+  const deleteTutorial = await prisma.tutorial.delete({
+    where: {
+      id: +id,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+    deleteTutorial,
+  });
 });
