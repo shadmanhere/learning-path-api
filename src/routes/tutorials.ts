@@ -6,7 +6,7 @@ import { Role } from '../types/user';
 const router = express.Router();
 
 router.route('/random').get(getRandomTutorials);
-router.route('/all').get(isAuthenticated, getAllTutorials);
+router.route('/').get(isAuthenticated, getAllTutorials);
 router.route('/:videoId').get(isAuthenticated, getTutorial);
 router.route('/new').post(isAuthenticated, authorizeRoles(Role.ADMIN), addTutorial);
 router.route('/update').put(isAuthenticated, authorizeRoles(Role.ADMIN), updateTutorial);
