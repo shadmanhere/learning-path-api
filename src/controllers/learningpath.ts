@@ -90,3 +90,22 @@ export const updatePath = catchAsyncErrors(async (req: Request, res: Response, n
     learningPath,
   });
 });
+
+export const deleteLearningPath = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return next(new ErrorHandler('Please enter id', 400));
+  }
+
+  const deleteLearningPath = await prisma.learningPath.delete({
+    where: {
+      id: +id,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+    'deleted learning path': deleteLearningPath,
+  });
+});
