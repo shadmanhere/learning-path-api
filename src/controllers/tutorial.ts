@@ -46,6 +46,23 @@ export const getTutorial = catchAsyncErrors(async (req: Request, res: Response, 
 });
 
 // Admin
+export const getAllTutorials = catchAsyncErrors(async (req: Request, res: Response) => {
+  const resPerPage = 10;
+  const pageNumber = (req.query.pageNumber as unknown as number) || 1;
+  const totalCount = await prisma.tutorial.count({});
+  const tutorials = await prisma.tutorial.findMany({
+    skip: (pageNumber - 1) * resPerPage,
+    take: +resPerPage,
+  });
+  res.status(200).json({
+    success: true,
+    totalCount,
+    resPerPage,
+    pageNumber,
+    tutorials,
+  });
+});
+
 export const addTutorial = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { title, url, image_url } = req.body;
   const tutorial = await prisma.tutorial.create({
