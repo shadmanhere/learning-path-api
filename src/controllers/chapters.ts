@@ -9,10 +9,19 @@ const prisma = new PrismaClient();
 export const getChapters = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const resPerPage = 10;
   const pageNumber = (req.query.pageNumber as unknown as number) || 1;
+  const tutorialId = req.query.tutorialId;
+
+  if (!tutorialId) {
+    return next(new ErrorHandler('Please enter category tutorial id', 400));
+  }
+
   const totalCount = await prisma.chapter.count({});
   const chapters = await prisma.chapter.findMany({
     skip: (pageNumber - 1) * resPerPage,
     take: +resPerPage,
+    where: {
+      tutorialId: +tutorialId,
+    },
   });
   res.status(200).json({
     success: true,
