@@ -24,7 +24,7 @@ export const getChapters = catchAsyncErrors(async (req: Request, res: Response, 
 });
 
 // Admin
-export const addChapters = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+export const addChapter = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { title, url, imageUrl } = req.body;
   if (!title) {
     return next(new ErrorHandler('Please enter category title', 400));
@@ -45,4 +45,20 @@ export const addChapters = catchAsyncErrors(async (req: Request, res: Response, 
     success: true,
     chapter,
   });
+});
+
+export const updateChapter = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { id, title, url, imageUrl } = req.body;
+
+  const chapter = await prisma.chapter.update({
+    where: {
+      id: +id,
+    },
+    data: {
+      title,
+      url,
+      imageUrl,
+    },
+  });
+  res.status(200).json({ success: true, chapter });
 });
