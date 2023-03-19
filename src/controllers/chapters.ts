@@ -51,7 +51,7 @@ export const addChapter = catchAsyncErrors(async (req: Request, res: Response, n
 });
 
 export const updateChapter = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
-  const { id, title, url, imageUrl } = req.body;
+  const { id, title, url, imageUrl, tutorialId } = req.body;
 
   const chapter = await prisma.chapter.update({
     where: {
@@ -61,6 +61,7 @@ export const updateChapter = catchAsyncErrors(async (req: Request, res: Response
       title,
       url,
       imageUrl,
+      tutorialId,
     },
   });
   res.status(200).json({ success: true, chapter });
