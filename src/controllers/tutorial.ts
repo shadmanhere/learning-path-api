@@ -41,6 +41,9 @@ export const getTutorial = catchAsyncErrors(async (req: Request, res: Response, 
     where: {
       url: videoUrl,
     },
+    include: {
+      Chapter: true,
+    },
   });
   res.send({ success: true, tutorial });
 });
