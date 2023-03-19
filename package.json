@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "prod":"node dist/index.js",
+    "prod":"npx tsc && node dist/index.js",
     "start": "nodemon",
     "seeder": "npx ts-node src/utils/seeder.ts",
     "lint": "eslint src/**/*.ts",
