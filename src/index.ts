@@ -50,7 +50,7 @@ app.use('/api/v1/section', sectionsRoutes);
 app.use('/api/v1/tutorial', tutorialsRoutes);
 app.use('/api/v1/category', categoryRoute);
 app.use('/api/v1/categoryToLearningPath', categoryToLearningPathRoute);
-app.use('/api/v1/chapters', chaptersRoute);
+app.use('/api/v1/chapter', chaptersRoute);
 
 const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
