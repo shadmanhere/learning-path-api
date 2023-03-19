@@ -22,3 +22,27 @@ export const getChapters = catchAsyncErrors(async (req: Request, res: Response, 
     chapters,
   });
 });
+
+// Admin
+export const addChapters = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { title, url, imageUrl } = req.body;
+  if (!title) {
+    return next(new ErrorHandler('Please enter category title', 400));
+  } else if (!url) {
+    return next(new ErrorHandler('Please enter category url', 400));
+  } else if (!imageUrl) {
+    return next(new ErrorHandler('Please enter category image url', 400));
+  }
+
+  const chapter = await prisma.chapter.create({
+    data: {
+      title,
+      url,
+      imageUrl,
+    },
+  });
+  res.send({
+    success: true,
+    chapter,
+  });
+});
