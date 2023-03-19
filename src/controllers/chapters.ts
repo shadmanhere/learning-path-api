@@ -62,3 +62,19 @@ export const updateChapter = catchAsyncErrors(async (req: Request, res: Response
   });
   res.status(200).json({ success: true, chapter });
 });
+
+export const deleteChapter = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return next(new ErrorHandler('Please enter id', 400));
+  }
+
+  const deletedChapter = await prisma.chapter.delete({
+    where: {
+      id: +id,
+    },
+  });
+
+  res.status(200).json({ success: true, deletedChapter });
+});
