@@ -45,8 +45,8 @@ export const updateChapterToUser = catchAsyncErrors(async (req: Request, res: Re
       },
     },
     data: {
-      chapterId: +chapterId,
-      userId: +userId,
+      chapterId: +newUserId,
+      userId: +newChapterId,
     },
   });
   res.send({
