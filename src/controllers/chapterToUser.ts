@@ -6,7 +6,6 @@ import ErrorHandler from '../utils/errorHandler';
 
 const prisma = new PrismaClient();
 
-// Admin
 export const addChapterToUser = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { chapterId, userId } = req.body;
   if (!chapterId) {
@@ -28,6 +27,7 @@ export const addChapterToUser = catchAsyncErrors(async (req: Request, res: Respo
   });
 });
 
+// Admin
 export const updateChapterToUser = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { chapterId, userId, newUserId, newChapterId } = req.body;
   if (!chapterId) {

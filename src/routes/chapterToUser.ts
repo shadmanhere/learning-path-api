@@ -5,7 +5,7 @@ import { Role } from '../types/user';
 
 const router = express.Router();
 
-router.route('/new').post(isAuthenticated, authorizeRoles(Role.ADMIN), addChapterToUser);
+router.route('/new').post(isAuthenticated, addChapterToUser);
 router.route('/update').put(isAuthenticated, authorizeRoles(Role.ADMIN), updateChapterToUser);
 
 export default router;
