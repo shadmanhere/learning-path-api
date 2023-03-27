@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { CustomRequest } from '../types/customRequest';
 
 import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
 import { PrismaClient } from '@prisma/client';
@@ -34,7 +35,7 @@ export const getRandomTutorials = catchAsyncErrors(async (req: Request, res: Res
 });
 
 // /api/v1/tutorial/videoId
-export const getTutorial = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+export const getTutorial = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
   const videoId = req.params.videoId;
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   const tutorial = await prisma.tutorial.findFirst({
@@ -42,9 +43,18 @@ export const getTutorial = catchAsyncErrors(async (req: Request, res: Response, 
       url: videoUrl,
     },
     include: {
-      Chapter: true,
+      Chapter: {
+        include: {
+          ChapterToUser: {
+            where: {
+              userId: req?.user?.id,
+            },
+          },
+        },
+      },
     },
   });
+
   res.send({ success: true, tutorial });
 });
 
