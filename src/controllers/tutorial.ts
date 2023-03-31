@@ -44,6 +44,11 @@ export const getTutorial = catchAsyncErrors(async (req: CustomRequest, res: Resp
     },
     include: {
       Chapter: {
+        orderBy: [
+          {
+            order: 'asc',
+          },
+        ],
         include: {
           ChapterToUser: {
             where: {

@@ -116,6 +116,7 @@ model Chapter {
   imageUrl      String          @map("image_url")
   Tutorial      Tutorial?       @relation(fields: [tutorialId], references: [id])
   tutorialId    Int?            @map("tutorial_id")
+  order             Int?                @map("order")
   ChapterToUser ChapterToUser[]
 
   @@map("chapters")
