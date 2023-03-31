@@ -37,6 +37,11 @@ export const getPath = catchAsyncErrors(async (req: Request, res: Response) => {
     },
     include: {
       Section: {
+        orderBy: [
+          {
+            order: 'asc',
+          },
+        ],
         include: {
           SectionToTutorial: {
             include: {
