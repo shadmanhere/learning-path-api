@@ -59,6 +59,7 @@ model Section {
   LearningPath      LearningPath?       @relation(fields: [learningPathId], references: [id])
   learningPathId    Int?                @map("learning_path_id")
   SectionToTutorial SectionToTutorial[]
+  order             Int?                @map("order")
 
   @@map("sections")
 }
@@ -81,6 +82,7 @@ model SectionToTutorial {
   sectionId  Int      @map("section_id")
   Tutorial   Tutorial @relation(fields: [tutorialId], references: [id])
   tutorialId Int      @map("tutorial_id")
+  order             Int?                @map("order")
 
   @@id([sectionId, tutorialId])
   @@map("sections_to_tutorials")
