@@ -4,6 +4,7 @@ import {
   signup,
   signin,
   checkUsername,
+  checkEmail,
   deleteUser,
   forgotPassword,
   getResetPassword,
@@ -22,7 +23,8 @@ const router = express.Router();
 router.route('/me').get(isAuthenticated, getUserProfile);
 router.route('/me/update').put(isAuthenticated, updateProfile);
 router.post('/signup', signup);
-router.post('/checkUsername', checkUsername);
+router.post('/checkusername', checkUsername);
+router.post('/checkemail', checkEmail);
 router.post('/signin', signin);
 router.route('/logout').get(logout);
 router.route('/forgot').post(forgotPassword);

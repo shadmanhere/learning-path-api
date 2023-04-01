@@ -260,6 +260,29 @@ export const checkUsername = catchAsyncErrors(async (req: Request, res: Response
   }
 });
 
+export const checkEmail = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { email } = req.body;
+  if (!email) {
+    return next(new ErrorHandler('Please enter username', 400));
+  }
+  const existingEmail = await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+  if (existingEmail) {
+    res.status(200).json({
+      success: true,
+      message: 'Email already exists',
+    });
+  } else {
+    res.status(200).json({
+      success: true,
+      message: 'Email is available',
+    });
+  }
+});
+
 // Admin Route
 export const getUsers = catchAsyncErrors(async (req: Request, res: Response) => {
   const resPerPage = 10;
