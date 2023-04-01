@@ -237,6 +237,29 @@ export const updateProfile = catchAsyncErrors(async (req: CustomRequest, res: Re
   });
 });
 
+export const checkUsername = catchAsyncErrors(async (req: Request, res: Response, next: NextFunction) => {
+  const { username } = req.body;
+  if (!username) {
+    return next(new ErrorHandler('Please enter username', 400));
+  }
+  const existingUsername = await prisma.user.findFirst({
+    where: {
+      username,
+    },
+  });
+  if (existingUsername) {
+    res.status(200).json({
+      success: true,
+      message: 'Username already exists',
+    });
+  } else {
+    res.status(200).json({
+      success: true,
+      message: 'Username is available',
+    });
+  }
+});
+
 // Admin Route
 export const getUsers = catchAsyncErrors(async (req: Request, res: Response) => {
   const resPerPage = 10;

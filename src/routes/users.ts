@@ -1,6 +1,9 @@
 import express from 'express';
 import { authorizeRoles, isAuthenticated } from '../middlewares/auth';
 import {
+  signup,
+  signin,
+  checkUsername,
   deleteUser,
   forgotPassword,
   getResetPassword,
@@ -12,8 +15,6 @@ import {
   updateProfile,
   updateUserDetails,
 } from '../controllers/user';
-import { signup } from '../controllers/user';
-import { signin } from '../controllers/user';
 import { Role } from '../types/user';
 
 const router = express.Router();
@@ -21,6 +22,7 @@ const router = express.Router();
 router.route('/me').get(isAuthenticated, getUserProfile);
 router.route('/me/update').put(isAuthenticated, updateProfile);
 router.post('/signup', signup);
+router.post('/checkUsername', checkUsername);
 router.post('/signin', signin);
 router.route('/logout').get(logout);
 router.route('/forgot').post(forgotPassword);
