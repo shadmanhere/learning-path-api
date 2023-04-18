@@ -46,6 +46,8 @@ model LearningPath {
   id                     Int                      @id @default(autoincrement()) @map("id")
   createdAt              DateTime                 @default(now()) @map("created_at")
   name                   String                   @unique @map("name")
+  description            String                   @default("") @map("description")
+  duration               String                   @default("") @map("duration")
   Section                Section[]
   CategoryToLearningPath CategoryToLearningPath[]
 
@@ -70,6 +72,8 @@ model Tutorial {
   title              String               @unique @map("title")
   url                String               @map("url")
   imageUrl           String               @map("image_url")
+  description        String               @default("") @map("description")
+  duration           String               @default("") @map("duration")
   Chapter            Chapter[]
   SectionToTutorial  SectionToTutorial[]
   CategoryToTutorial CategoryToTutorial[]
@@ -82,7 +86,7 @@ model SectionToTutorial {
   sectionId  Int      @map("section_id")
   Tutorial   Tutorial @relation(fields: [tutorialId], references: [id])
   tutorialId Int      @map("tutorial_id")
-  order             Int?                @map("order")
+  order      Int?     @map("order")
 
   @@id([sectionId, tutorialId])
   @@map("sections_to_tutorials")
@@ -116,7 +120,7 @@ model Chapter {
   imageUrl      String          @map("image_url")
   Tutorial      Tutorial?       @relation(fields: [tutorialId], references: [id])
   tutorialId    Int?            @map("tutorial_id")
-  order             Int?                @map("order")
+  order         Int?            @map("order")
   ChapterToUser ChapterToUser[]
 
   @@map("chapters")
