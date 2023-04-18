@@ -46,6 +46,7 @@ model LearningPath {
   id                     Int                      @id @default(autoincrement()) @map("id")
   createdAt              DateTime                 @default(now()) @map("created_at")
   name                   String                   @unique @map("name")
+  imageUrl               String                   @default("") @map("image_url")
   description            String                   @default("") @map("description")
   duration               String                   @default("") @map("duration")
   Section                Section[]
