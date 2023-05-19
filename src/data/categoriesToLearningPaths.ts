@@ -5,4 +5,6 @@ export const categoriesToLearningPaths = [
   { categoryId: 1, learningPathId: 4 },
   { categoryId: 1, learningPathId: 5 },
   { categoryId: 2, learningPathId: 6 },
+  { categoryId: 1, learningPathId: 7 },
+  { categoryId: 1, learningPathId: 8 },
 ];
