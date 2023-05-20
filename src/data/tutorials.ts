@@ -1,5 +1,5 @@
 export const tutorials = [
-  [`id`, `title`, `url`, `image_url`, `created_at`, `description`, `duration`],
+  [`id`, `title`, `url`, `imageUrl`, `createdAt`, `description`, `duration`],
   [
     [
       1,

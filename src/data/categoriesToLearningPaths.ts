@@ -1,5 +1,5 @@
 export const categoriesToLearningPaths = [
-  [`category_id`, `learning_path_id`],
+  [`categoryId`, `learningPathId`],
   [
     [1, 1],
     [1, 2],

@@ -1,5 +1,5 @@
 export const sections = [
-  [`id`, `name`, `created_at`, `learning_path_id`, `order`],
+  [`id`, `name`, `createdAt`, `learningPathId`, `order`],
   [
     [1, 'Essentials', '2023-01-31 04:35:19.600', 4, null],
     [2, 'Intermediate', '2023-01-31 04:35:19.600', 4, null],

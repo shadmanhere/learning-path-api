@@ -1,5 +1,5 @@
 export const chapters = [
-  [`id`, `title`, `image_url`, `tutorial_id`, `created_at`, `url`, `order`],
+  [`id`, `title`, `imageUrl`, `tutorialId`, `createdAt`, `url`, `order`],
   [
     [
       1,

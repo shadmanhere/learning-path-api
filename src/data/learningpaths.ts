@@ -1,5 +1,5 @@
 export const learningpaths = [
-  [`id`, `name`, `created_at`, `description`, `duration`, `image_url`],
+  [`id`, `name`, `createdAt`, `description`, `duration`, `imageUrl`],
   [
     [1, 'React Js Developer', '2023-01-31 04:35:19.579', '', '', ''],
     [2, 'Angular Developer', '2023-01-31 04:35:19.579', '', '', ''],

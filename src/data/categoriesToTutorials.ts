@@ -1,5 +1,5 @@
 export const categoriesToTutorials = [
-  [`category_id`, `tutorial_id`],
+  [`categoryId`, `tutorialId`],
   [
     [1, 1],
     [1, 2],

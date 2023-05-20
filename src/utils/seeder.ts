@@ -7,67 +7,126 @@ import { sectiontotutorials } from '../data/sectiontotutorials';
 import { categories } from '../data/categories';
 import { categoriesToLearningPaths } from '../data/categoriesToLearningPaths';
 import { categoriesToTutorials } from '../data/categoriesToTutorials';
+import { chapters } from '../data/chapters';
 
 const prisma = new PrismaClient();
 
-export const seeder = async () => {
-  await prisma.learningPath
-    .createMany({
-      data: learningpaths,
-    })
-    .catch((reason: any) => {
-      console.error(reason);
+const seedHelper = (inputData: (string[] | (string | number | null)[][])[] | [any, any]) => {
+  const [keys, values] = inputData;
+  const result = values.map((arr: { [x: string]: string | number }) => {
+    const obj: Record<string, string | number | Date> = {};
+    keys.forEach((key: unknown, index: string | number) => {
+      if (key === 'createdAt') obj[key as unknown as string | number] = new Date(arr[index]);
+      else obj[key as unknown as string | number] = arr[index];
     });
+    return obj;
+  });
+  return result;
+};
 
+export const seeder = async () => {
   await prisma.category
     .createMany({
-      data: categories,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(categories) as any,
     })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .catch((reason: any) => {
       console.error(reason);
+    })
+    .finally(() => {
+      prisma.$disconnect();
     });
 
-  const newTutorials = tutorials.map((tutorial) => {
-    return { title: tutorial.title, url: tutorial.url, imageUrl: tutorial.image_url };
-  });
-  await prisma.tutorial
+  await prisma.learningPath
     .createMany({
-      data: newTutorials,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(learningpaths) as any,
     })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .catch((reason: any) => {
       console.error(reason);
-    });
-
-  await prisma.section
-    .createMany({
-      data: sections,
     })
-    .catch((reason: any) => {
-      console.error(reason);
-    });
-
-  await prisma.sectionToTutorial
-    .createMany({
-      data: sectiontotutorials,
-    })
-    .catch((reason: any) => {
-      console.error(reason);
+    .finally(() => {
+      prisma.$disconnect();
     });
 
   await prisma.categoryToLearningPath
     .createMany({
-      data: categoriesToLearningPaths,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(categoriesToLearningPaths) as any,
     })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .catch((reason: any) => {
       console.error(reason);
+    })
+    .finally(() => {
+      prisma.$disconnect();
+    });
+
+  await prisma.section
+    .createMany({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(sections) as any,
+    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .catch((reason: any) => {
+      console.error(reason);
+    })
+    .finally(() => {
+      prisma.$disconnect();
+    });
+
+  await prisma.tutorial
+    .createMany({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(tutorials) as any,
+    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .catch((reason: any) => {
+      console.error(reason);
+    })
+    .finally(() => {
+      prisma.$disconnect();
     });
 
   await prisma.categoryToTutorial
     .createMany({
-      data: categoriesToTutorials,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(categoriesToTutorials) as any,
     })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .catch((reason: any) => {
       console.error(reason);
+    })
+    .finally(() => {
+      prisma.$disconnect();
+    });
+
+  await prisma.sectionToTutorial
+    .createMany({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(sectiontotutorials) as any,
+    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .catch((reason: any) => {
+      console.error(reason);
+    })
+    .finally(() => {
+      prisma.$disconnect();
+    });
+
+  await prisma.chapter
+    .createMany({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: seedHelper(chapters) as any,
+    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .catch((reason: any) => {
+      console.error(reason);
+    })
+    .finally(() => {
+      prisma.$disconnect();
     });
 };
 
