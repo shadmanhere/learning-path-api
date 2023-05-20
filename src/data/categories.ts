@@ -1,1 +1,7 @@
-export const categories = [{ name: 'tech' }, { name: 'upsc' }];
+export const categories = [
+  [`id`, `name`],
+  [
+    [1, 'tech'],
+    [2, 'upsc'],
+  ],
+];
