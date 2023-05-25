@@ -1,5 +1,5 @@
 ## Click on the image below to see the app preview
-[![Learning Path](https://user-images.githubusercontent.com/17983225/209483642-c0c12244-ba26-4d80-89c2-b0653da4a57d.png)](https://youtu.be/378Rc1IYh5E)
+[![Learning Path](https://github.com/shadmanhere/learning-path/assets/17983225/8f4792ba-d4d6-40a3-93c2-9d467398b82e)](https://youtu.be/378Rc1IYh5E)
 
 ## Frontend Repository
 [https://github.com/shadmanhere/learning-path](https://github.com/shadmanhere/learning-path)
