@@ -4,12 +4,15 @@ import { PrismaClient } from '@prisma/client';
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption';
 import crypto from 'crypto';
 
+// passportjs
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+
 // util
 import { sendToken } from '../utils/jwtToken';
 import ErrorHandler from '../utils/errorHandler';
 import excludeKey from '../utils/excludeKey';
 
-//types
+// types
 import { CustomRequest } from '../types/customRequest';
 import { getResetPasswordToken } from '../utils/cryptoToken';
 import { sendEmail } from '../utils/sendEmail';
