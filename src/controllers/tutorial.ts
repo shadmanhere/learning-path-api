@@ -52,7 +52,7 @@ export const getTutorial = catchAsyncErrors(async (req: CustomRequest, res: Resp
         include: {
           ChapterToUser: {
             where: {
-              userId: req?.user?.id,
+              userId: req?.userDetails?.id,
             },
           },
         },

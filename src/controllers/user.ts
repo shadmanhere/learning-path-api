@@ -80,7 +80,7 @@ export const signup = catchAsyncErrors(async (req: Request, res: Response, next:
 export const getUserProfile = catchAsyncErrors(async (req: CustomRequest, res: Response) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: req.user?.id,
+      id: req.userDetails?.id,
     },
   });
   const userWithoutPassword = user ? excludeKey(user, ['password']) : '';
@@ -189,7 +189,7 @@ export const getResetPassword = catchAsyncErrors(async (req: CustomRequest, res:
 });
 
 export const updatePassword = catchAsyncErrors(async (req: CustomRequest, res: Response, next: NextFunction) => {
-  const id = req?.user?.id;
+  const id = req?.userDetails?.id;
   const user = await prisma.user.findUnique({
     where: {
       id: id,
@@ -222,7 +222,7 @@ export const updateProfile = catchAsyncErrors(async (req: CustomRequest, res: Re
 
   const user = await prisma.user.update({
     where: {
-      id: req?.user?.id,
+      id: req?.userDetails?.id,
     },
     data: {
       username: newUser.username,
