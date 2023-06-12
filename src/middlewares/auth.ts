@@ -29,7 +29,7 @@ export const isAuthenticated = catchAsyncErrors(async (req: CustomRequest, res: 
   });
   const newUser = excludeKey(user, ['password'] as never);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  req.user = newUser as any;
+  req.userDetails = newUser as any;
   next();
 });
 
