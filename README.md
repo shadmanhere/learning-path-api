@@ -5,7 +5,7 @@
 [https://github.com/shadmanhere/learning-path](https://github.com/shadmanhere/learning-path)
 
 ## Demo
-[https://www.youtube-nocookie.com/embed/378Rc1IYh5E?si=kZESqs-xN3NnxydP](https://www.youtube-nocookie.com/embed/378Rc1IYh5E?si=kZESqs-xN3NnxydP)
+[https://www.youtube.com/watch?v=378Rc1IYh5E](https://www.youtube.com/watch?v=378Rc1IYh5E)
 
 ## API Documentaion
 [https://documenter.getpostman.com/view/17518418/2s8Z73yB41](https://documenter.getpostman.com/view/17518418/2s8Z73yB41)
